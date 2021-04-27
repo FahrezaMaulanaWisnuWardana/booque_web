@@ -1,14 +1,14 @@
-## Tentang Booque Web And API
+# Tentang Booque Web And API
 Dibuat dengan Laravel 8 
 
 ## Auth API
 Belom ada
 
 ## Route API
-* Login
-- Login OAUTH (Google) :white_checkmark:
-    **POST** - 127.0.0.1:PORT/api/login-oauth
-    ** PARAMETER **
+### Login
+Login OAUTH (Google) :white_checkmark:
+**POST** - 127.0.0.1:PORT/api/login-oauth
+** PARAMETER **
 Parameter | Mandatory
 --------- | ---------
 Email | Y
