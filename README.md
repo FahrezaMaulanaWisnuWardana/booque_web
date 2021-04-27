@@ -24,3 +24,25 @@ Parameter | Mandatory
 --------- | ---------
 Email | Y
 Password | Y
+
+### Register
+- Register OAUTH
+
+**POST** - /api/daftar-oauth
+
+**PARAMETER**
+Parameter | Mandatory
+--------- | ---------
+Nama | Y
+Email | Y
+Password | Y
+
+- Login Default
+
+**POST** - /api/daftar
+
+**PARAMETER**
+Parameter | Mandatory
+--------- | ---------
+Nama | Y
+Email | Y
