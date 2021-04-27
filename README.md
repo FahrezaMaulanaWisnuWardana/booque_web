@@ -5,7 +5,7 @@ Dibuat dengan Laravel 8
 Belom ada
 
 ## Route API
-Login
+* Login
 - Login OAUTH (Google) :white_checkmark:
     **POST** - 127.0.0.1:PORT/api/login-oauth
     ** PARAMETER **
