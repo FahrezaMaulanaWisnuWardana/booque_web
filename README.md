@@ -2,19 +2,19 @@
 Dibuat dengan Laravel 8 
 
 ## Auth API
-	- ** Belom ada
+	* Belom ada
 
 ## Route API
 	**METHOD** - PATH
-	- ** Login
-		- ** Login OAUTH (Google)
+	* Login
+		* Login OAUTH (Google)
 			**POST** - 127.0.0.1:PORT/api/login-oauth
 			** PARAMETER **
 			Parameter | Mandatory
 			------------ | -------------
 			Email | Y
 
-		- ** Login Default
+		* Login Default
 			**POST** - 127.0.0.1:PORT/api/login
 			** PARAMETER **
 			Parameter | Mandatory
