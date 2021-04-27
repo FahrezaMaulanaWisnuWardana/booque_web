@@ -26,9 +26,9 @@ Email | Y
 Password | Y
 
 ### Register
-- Register OAUTH
+- Register
 
-**POST** - /api/daftar-oauth
+**POST** - /api/daftar
 
 **PARAMETER**
 Parameter | Mandatory
@@ -37,9 +37,9 @@ Nama | Y
 Email | Y
 Password | Y
 
-- Login Default
+- Register OAUTH
 
-**POST** - /api/daftar
+**POST** - /api/daftar-oauth
 
 **PARAMETER**
 Parameter | Mandatory
