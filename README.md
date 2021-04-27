@@ -9,7 +9,8 @@ Belom ada
 - Login OAUTH
 
 **POST** - 127.0.0.1:PORT/api/login-oauth
-    **PARAMETER**
+
+**PARAMETER:**
 Parameter | Mandatory
 --------- | ---------
 Email | Y
@@ -17,7 +18,8 @@ Email | Y
 - Login Default
 
 **POST** - 127.0.0.1:PORT/api/login
-    **PARAMETER**
+
+**PARAMETER:**
 Parameter | Mandatory
 --------- | ---------
 Email | Y
