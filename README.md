@@ -6,7 +6,7 @@ Belom ada
 
 ## Route API
 ### Login
-- Login OAUTH :white_checkmark:
+- Login OAUTH
 
 **POST** - 127.0.0.1:PORT/api/login-oauth
 ** PARAMETER **
@@ -14,7 +14,7 @@ Parameter | Mandatory
 --------- | ---------
 Email | Y
 
-- Login Default :white_check_mark:
+- Login Default
 
 **POST** - 127.0.0.1:PORT/api/login
 ** PARAMETER **
