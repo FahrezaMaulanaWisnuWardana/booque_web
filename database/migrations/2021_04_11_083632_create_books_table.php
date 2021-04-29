@@ -14,17 +14,19 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->increments('book_id',255)->unique();
+            $table->id();
             $table->string('book_name',100);
             $table->foreignId('user_id');
             $table->text('description');
             $table->text('address');
             $table->foreignId('category_id');
-            $table->enum('status',['1','2']);
+            $table->enum('status',['1','2'])->default('1');
             $table->text('thumbnail');
             $table->string('author',50);
             $table->year('year');
             $table->string('publisher',50);
+            $table->foreignId('city_id');
+            $table->foreignId('province_id');
             $table->timestamps();
         });
     }

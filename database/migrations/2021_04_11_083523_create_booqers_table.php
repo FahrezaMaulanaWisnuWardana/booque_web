@@ -14,11 +14,11 @@ class CreateBooqersTable extends Migration
     public function up()
     {
         Schema::create('booqers', function (Blueprint $table) {
-            $table->increments('user_id',255)->unique();
+            $table->id();
             $table->string('email',50);
-            $table->string('password',64);
+            $table->string('password',64)->nullable();
             $table->enum('is_active',['1','2']);
-            $table->enum('login_type',['default','oauth']);
+            $table->enum('login_type',['default','oauth'])->default('default');
             $table->timestamps();
         });
     }

@@ -14,10 +14,10 @@ class CreateBannerTable extends Migration
     public function up()
     {
         Schema::create('banner', function (Blueprint $table) {
-            $table->increments('banner_id',50)->unique();
+            $table->id();
             $table->string('tittle',50);
             $table->text('image');
-            $table->enum('is_active',['1','2']);
+            $table->enum('is_active',['1','2'])->default('1');
             $table->timestamps();
         });
     }
