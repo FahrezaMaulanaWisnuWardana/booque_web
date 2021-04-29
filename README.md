@@ -5,6 +5,7 @@ Dibuat dengan Laravel 8
 Belom ada
 
 ## Route API
+
 ### Login
 - Login OAUTH
 
@@ -26,18 +27,19 @@ email | Y
 password | Y
 
 ### Register
-- Register OAUTH
+- Regiter Default
 
-**POST** - /api/daftar-oauth
+**POST** - /api/daftar
 
 **PARAMETER**
+
 Parameter | Mandatory
 --------- | ---------
 nama | Y
 email | Y
 password | Y
 
-- Regiter Default
+- Register OAUTH
 
 **POST** - /api/daftar
 
