@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Booqers;
 use App\Models\Booqers_d;
+use Illuminate\Support\Facades\Hash;
 
 class LoginAppController extends Controller
 {
