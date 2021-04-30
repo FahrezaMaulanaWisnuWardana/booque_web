@@ -33,13 +33,14 @@ password | Y
 
 **PARAMETER**
 
-Parameter | Mandatory
---------- | ---------
-nama | Y
-email | Y
-password | Y
+Parameter | Mandatory | value
+--------- | --------- | -----
+nama | Y |
+email | Y |
+password | Y |
+type | Y | default , oauth
 
-- Register OAUTH
+<!-- - Register OAUTH
 
 **POST** - /api/daftar
 
@@ -47,7 +48,7 @@ password | Y
 Parameter | Mandatory
 --------- | ---------
 nama | Y
-email | Y
+email | Y -->
 
 ### Buku
 

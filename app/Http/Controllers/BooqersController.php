@@ -63,7 +63,7 @@ class BooqersController extends Controller
 
                 $booqers->email = $request->email;
                 $booqers->password = Hash::make($request->password);
-                $booqers->login_type = 'default';
+                $booqers->login_type = $request->type;
                 $result = $booqers->save();
                 if($result){
                     $booqers_d->user_id = $booqers->id;
@@ -86,51 +86,51 @@ class BooqersController extends Controller
             }   
         }
     }
-    public function store_oauth(Request $request)
-    {
-        $booqers = new Booqers;
-        $booqers_d = new Booqers_d;
+    // public function store_oauth(Request $request)
+    // {
+    //     $booqers = new Booqers;
+    //     $booqers_d = new Booqers_d;
 
-        $rules = [
-            "nama"=>"min:5|max:50|required",
-            "email"=>"required",
-        ];
+    //     $rules = [
+    //         "nama"=>"min:5|max:50|required",
+    //         "email"=>"required",
+    //     ];
 
-        $data = Booqers::where("email",$request->email)->count();
-        if ($data>0) {
-            return response([
-                'debug_msg'=>'Email is already registered'
-            ], 400)->header('Content-Type', 'application/json');
-        }else{
-            $validator = Validator::make($request->all(),$rules);
-            if ($validator->fails()) {
-                return $validator->errors();
-            }else{
-                $booqers->email = $request->email;
-                $booqers->login_type = 'oauth';
-                $result = $booqers->save();
-                if($result){
-                    $booqers_d->user_id = $booqers->id;
-                    $booqers_d->full_name = $request->nama;
-                    $save = $booqers_d->save();
-                    if ($save) {
-                        return response([
-                            'debug_msg'=>'success'
-                        ], 200)->header('Content-Type', 'application/json');
-                    }else{
-                        return response([
-                            'debug_msg'=>'Something Wrong'
-                        ], 400)->header('Content-Type', 'application/json');
-                    }
-                }else{
-                        return response([
-                            'debug_msg'=>'Proses Failed'
-                        ], 400)->header('Content-Type', 'application/json');
-                }
-            }
-        }
+    //     $data = Booqers::where("email",$request->email)->count();
+    //     if ($data>0) {
+    //         return response([
+    //             'debug_msg'=>'Email is already registered'
+    //         ], 400)->header('Content-Type', 'application/json');
+    //     }else{
+    //         $validator = Validator::make($request->all(),$rules);
+    //         if ($validator->fails()) {
+    //             return $validator->errors();
+    //         }else{
+    //             $booqers->email = $request->email;
+    //             $booqers->login_type = 'oauth';
+    //             $result = $booqers->save();
+    //             if($result){
+    //                 $booqers_d->user_id = $booqers->id;
+    //                 $booqers_d->full_name = $request->nama;
+    //                 $save = $booqers_d->save();
+    //                 if ($save) {
+    //                     return response([
+    //                         'debug_msg'=>'success'
+    //                     ], 200)->header('Content-Type', 'application/json');
+    //                 }else{
+    //                     return response([
+    //                         'debug_msg'=>'Something Wrong'
+    //                     ], 400)->header('Content-Type', 'application/json');
+    //                 }
+    //             }else{
+    //                     return response([
+    //                         'debug_msg'=>'Proses Failed'
+    //                     ], 400)->header('Content-Type', 'application/json');
+    //             }
+    //         }
+    //     }
 
-    }
+    // }
 
     /**
      * Display the specified resource.
