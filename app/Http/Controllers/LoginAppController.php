@@ -34,7 +34,7 @@ class LoginAppController extends Controller
                     'debug_msg'=>'Data is not match in our record.'
                 ],400);
             }else{
-                $user_d = Booqers_d::where("user_id",$user->user_id)->first();
+                $user_d = Booqers_d::where("user_id",$user->id)->first();
                 if ($user->login_type==="oauth") {
                     return response(["user"=>$user_d],200);
                 }else{
