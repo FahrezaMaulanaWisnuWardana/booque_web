@@ -6,6 +6,30 @@ Belom ada
 
 ## Route API
 
+# Note Mandatory (Y = Wajib , N = Tidak Wajib)
+
+## Profile
+- Update Profile 
+
+**POST** - /api/update-profile/{id}
+
+**PARAMETER**
+Parameter | Mandatory
+--------- | ---------
+full_name | N
+address | N
+phone | N
+city_id | N
+province_id | N
+
+- Detail Profile
+**POST** - /api/profile
+
+**PARAMETER**
+Parameter | Mandatory
+--------- | ---------
+id | Y
+
 ### Login
 - Login OAUTH
 

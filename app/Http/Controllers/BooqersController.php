@@ -138,9 +138,15 @@ class BooqersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Request $req)
+    {   
+        $data = Booqers_d::find($req->id);
+        if ($data!==null) {
+            return ["result"=>$data];
+        }else{
+            return ["debug_msg"=>"User Not Found"];
+        }
+        
     }
 
     /**
@@ -161,9 +167,25 @@ class BooqersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $profile = Booqers_d::find($id);
+     
+        if($profile!==null){
+            $profile->full_name = ($request->full_name===null)?$profile->full_name:$request->full_name;
+            $profile->address = ($request->address===null)?$profile->address:$request->address;
+            $profile->phone = ($request->phone===null)?$profile->phone:$request->phone;
+            $profile->city_id = ($request->city_id===null)?$profile->city_id:$request->city_id;
+            $profile->province_id = ($request->province_id===null)?$profile->province_id:$request->province_id;
+            $result = $profile->save();
+            if ($result) {
+                return ["debug_msg"=>"Update Success"];
+            }else{
+                return ["debug_msg"=>"Update Failed"];
+            }
+        }else{
+            return ["debug_msg"=>"User Not Found"];
+        }
     }
 
     /**

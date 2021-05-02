@@ -27,11 +27,15 @@ Route::get("kota/search/{city_name?}",[CityController::class,'search']);
 
 // Register Route
 Route::post("daftar",[BooqersController::class,'store']);
-Route::post("daftar-oauth",[BooqersController::class,'store_oauth']);
+// Route::post("daftar-oauth",[BooqersController::class,'store_oauth']);
 
 // Login Route
 Route::post("login",[LoginAppController::class,'login']);
 Route::post("login-oauth",[LoginAppController::class,'login_oauth']);
+
+//Profile Route
+Route::post("profile",[BooqersController::class,'show']);
+Route::put("update-profile/{user_id}",[BooqersController::class,'update']);
 
 // Buku Route
 Route::post("buku",[BookController::class,'listBook']);

@@ -9,4 +9,5 @@ class Booqers_d extends Model
 {
     use HasFactory;
     protected $table = 'booqers_d';
+    protected $primaryKey = 'user_id';
 }
