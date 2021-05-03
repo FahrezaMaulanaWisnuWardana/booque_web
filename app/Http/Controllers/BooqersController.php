@@ -48,7 +48,8 @@ class BooqersController extends Controller
         $rules = [
             "nama"=>"min:5|max:50|required",
             "email"=>"required",
-            "password"=>"required"
+            "password"=>"required",
+            "type"=>"required"
         ];
         $data = Booqers::where("email",$request->email)->count();
         if ($data>0) {
@@ -70,8 +71,10 @@ class BooqersController extends Controller
                     $booqers_d->full_name = $request->nama;
                     $save = $booqers_d->save();
                     if ($save) {
+                        $data = Booqers_d::find($booqers->id);
                         return response([
-                            'response'=>'success'
+                            'response'=>'success',
+                            'result'=>$data
                         ], 200)->header('Content-Type', 'application/json');
                     }else{
                         return response([
