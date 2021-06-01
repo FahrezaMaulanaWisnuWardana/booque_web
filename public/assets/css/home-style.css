@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	font-family: 'Quicksand',sans-serif;
+}
+.text-center{text-align: center;}
+.card{border:none !important;}
+a{text-decoration: none !important;}
+li{list-style: none;}
+.active-header{
+	background:#ffff;
+	box-shadow: 0 4px 4px rgb(0 0 0 / 6%);
+}
+.active-header .header-custom ul li a{color:#333;}
+section{
+	position: relative;
+	width: 100%;
+	padding:0 100px;
+	background: #fff;
+}
+header{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 9999;
+	transition: all 0.2s cubic-bezier(0.55, 0, 0.55, 0.2);
+}
+.header-custom{
+	width: 88%;
+	margin: 0 auto;
+	padding: 10px 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+header .logo{
+	position: relative;
+	max-width: 50px;
+}
+#logo{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#logo span{
+	font-weight: bold;
+	font-size: 1.8em;
+	margin-left: 10px;
+	color: #333;
+}
+
+header ul{
+	position: relative;
+	display: flex;
+}
+header ul li a{
+	display: inline-block;
+	color: #ffff;
+	font-weight: 400;
+	font-size: 1.3em;
+	margin-left: 40px;
+}
+/*Home*/
+.content-home{
+	display: relative;
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.content-home .text-box{
+	position: relative;
+	max-width: 600px;
+}
+.content-home .text-box h2{
+	color: #333;
+	font-size: 2.2em;
+	line-height: 1.2em;
+	font-weight: 700;
+}
+.content-home .text-box h2 span{
+	color: #0779FF;
+	line-height: 1.2em;
+	font-weight: 700;
+}
+.content-home .text-box a{
+	color: #fff;
+	display: inline-block;
+	margin-top: 20px;
+	padding: 8px 20px;
+	background: #0779FF;
+	border-radius: 40px;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+.content-home .img-box{
+	max-width: 600px;
+	display: flex;
+	justify-content: flex-end;
+	padding-right:50px;
+	margin-top: 50px;
+	z-index: 999;
+
+}
+.content-home .img-box img{
+	max-width: 340px;
+	animation-duration: 1s;
+	animation-name: loopbook;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;
+}
+/*EndHome*/
+
+/*Team*/
+/*EndTeam*/
+.circle{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
+	background:#0779FF;
+	clip-path: circle(650px at right 150px);
+}
+/* Animation */
+@keyframes loopbook {
+	from{
+		transform: translateY(-5px);
+	}
+	to{
+		transform: translateY(-10px);
+	}
+}
+@-moz-keyframes loopbook {
+	from{
+		transform: translateY(-5px);
+	}
+	to{
+		transform: translateY(-10px);
+	}
+}
+@-webkit-keyframes loopbook {
+	from{
+		transform: translateY(-5px);
+	}
+	to{
+		transform: translateY(-10px);
+	}
+}
+@-o-keyframes loopbook {
+	from{
+		transform: translateY(-5px);
+	}
+	to{
+		transform: translateY(-10px);
+	}
+}
+/* End Animation */

@@ -8,6 +8,10 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Notifications\Notifiable;
+
 use App\Models\Booqers;
 use App\Models\Booqers_d;
 

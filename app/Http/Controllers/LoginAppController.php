@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Booqers;
 use App\Models\Booqers_d;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginAppController extends Controller
 {
@@ -17,8 +18,9 @@ class LoginAppController extends Controller
         $user = Booqers::where("email",$request->email)->first();
         if (!$user || !Hash::check($request->password,$user->password)){
             return response([
-                'debug_msg'=>'Data is not match in our record.'
-            ],400);
+                'status'=>401,
+                'msg'=>'Data is not match in our record.',
+            ],401);
         }else{
             $user_d = Booqers_d::where("user_id",$user->id)->first();
             return response(["user"=>$user_d],200);
