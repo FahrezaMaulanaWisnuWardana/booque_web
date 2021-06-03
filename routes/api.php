@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 	Route::put("update-profile/{user_id}",[BooqersController::class,'update']);
 
 	// Buku Route
+	Route::post("tambah-buku",[BookController::class,'addBook']);
 	Route::post("buku",[BookController::class,'listBook']);
 	Route::post("buku-sekitar",[BookController::class,'nearestBook']);
 });

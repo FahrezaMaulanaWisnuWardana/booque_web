@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\BookModel;
 use App\Models\Booqers_d;
 use App\Models\CategoryModel;
@@ -11,6 +13,62 @@ use App\Models\City;
 
 class BookController extends Controller
 {
+	function addBook(Request $req){
+        $user_d = DB::table('booqers_d')->where("user_id",$req->id)->first();
+        if ($user_d===null) {
+	        $data = [
+        		'error'=>4,
+        		'msg'=>"Akun tidak ditemukan"
+	        ];
+        }
+        if($user_d->address===null || $user_d->phone===null || $user_d->city_id===null || $user_d->province_id===null){
+        	$data = [
+        		'error'=>3,
+        		'msg'=>"Data akun belum lengkap"
+        	];
+        }else{
+        	$arr = [
+        		'book_name'=>$req->book_name,
+        		'user_id'=>$req->id,
+        		'description'=>$req->description,
+        		'address'=>$req->address,
+        		'category_id'=>$req->category_id,
+        		'status'=>1,
+        		'thumbnail'=>$req->thumbnail,
+        		'author'=>$req->author,
+        		'year'=>$req->year,
+        		'publisher'=>$req->publisher,
+        		'city_id'=>$req->city_id,
+        		'province_id'=>$req->province_id,
+        		'created_at' =>  date('Y-m-d H:i:s')
+        	];
+        	DB::table('books')->insert($arr);
+        	$validator = Validator::make($req->all(), [
+        		'book_name'=>'required',
+        		'user_id'=>'required',
+        		'description'=>'required',
+        		'address'=>'required',
+        		'category_id'=>'required',
+        		'thumbnail'=>'required',
+        		'author'=>'required',
+        		'year'=>'required',
+        		'publisher'=>'required',
+        		'city_id'=>'required',
+        		'province_id'=>'required'
+        	]);
+		    if ($validator->fails()) {
+		        $data = [
+	        		'error'=>3,
+	        		'msg'=>$validator->messages()
+		        ];
+		    }
+	        $data = [
+        		'error'=>0,
+        		'msg'=>"Sukses menambah buku"
+	        ];
+        }
+        return $data;
+	}
 	function listBook(Request $req){
 		if (is_null($req->book_name)) {
 			$res = DB::table('books')

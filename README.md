@@ -76,6 +76,27 @@ email | Y -->
 
 ### Buku
 
+- Tambah Buku
+
+**POST** - /api/tambah-buku
+
+**PARAMETER**
+Parameter | Mandatory
+--------- | ---------
+book_name | Y
+id		  | Y
+description | Y
+address		| Y
+category_id | Y
+thumbnail 	| Y
+author 		| Y
+year 		| Y
+publisher 	| Y
+city_id 	|
+province_id | Y
+
+
+
 - Buku (List Buku dan Pencarian)
 
 **POST** - /api/buku
