@@ -19,8 +19,8 @@
                 <span>Booque</span>
             </a>
             <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="{{url('/')}}">Beranda</a></li>
+                <li><a href="{{url('/blog')}}">Blog</a></li>
                 <li><a href="#">Kontak Kami</a></li>
             </ul>
         </div>
@@ -41,7 +41,7 @@
 
             <div class="owl-carousel position-relative mt-5" id="owl-how-to">
                 
-                <div class="card container mt-4" style="background:#3A4275; color:#f2f2f2;">
+                <div class="card mt-4" style="background:#3A4275; color:#f2f2f2;">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="py-5" style="padding-left: 70px">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="card container mt-4" style="background:#3A4275; color:#f2f2f2;">
+                <div class="card mt-4" style="background:#3A4275; color:#f2f2f2;">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="py-5" style="padding-left: 70px">
@@ -122,6 +122,28 @@
                 </div>
             </div>
         </div>
+        <div class="content-about py-5">
+            <div class="text-center mb-5">
+                <h5 class="py-2">Tentang Booque</h5>
+                <h2 class="py-2">Apa itu Booque</h2>
+                <span class="py-2">Berawal dari keresahan kami tentang buku yang tidak terpakai.</span>
+            </div>
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col">
+                        <img src="{{asset('assets')}}/image/onboard/reading.svg" class="w-75">
+                    </div>
+                    <div class="col align-self-center">
+                        <h3 class="text-center">Booque</h3>
+                        <p class="text-center">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="content-team py-5">
             <div class="text-center mb-5">
                 <h5 class="my-3">Tim Booque</h5>
@@ -166,28 +188,6 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <div class="content-about py-5">
-            <div class="text-center mb-5">
-                <h5 class="py-2">Tentang Booque</h5>
-                <h2 class="py-2">Apa itu Booque</h2>
-                <span class="py-2">Berawal dari keresahan kami tentang buku yang tidak terpakai.</span>
-            </div>
-            <div class="container">
-                <div class="row d-flex">
-                    <div class="col">
-                        <img src="{{asset('assets')}}/image/onboard/reading.svg" class="w-75">
-                    </div>
-                    <div class="col align-self-center">
-                        <h3 class="text-center">Booque</h3>
-                        <p class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
         <footer class="container py-5">

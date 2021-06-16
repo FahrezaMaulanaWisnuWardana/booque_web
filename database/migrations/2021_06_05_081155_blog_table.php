@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCityTable extends Migration
+class BlogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateCityTable extends Migration
      */
     public function up()
     {
-        Schema::create('city', function (Blueprint $table) {
+        Schema::create('blog', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('province_id');
-            $table->string('city_name',50);
-            $table->string('latitude',100);
-            $table->string('longitude',100);
+            $table->string('article_name',50);
+            $table->longText('thumbnail');
+            $table->string('slug',100);
+            $table->text('article');
+            $table->foreignId('category_id');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateCityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('city');
+        Schema::dropIfExists('blog');
     }
 }

@@ -37,7 +37,7 @@ $("#owl-how-to").owlCarousel({
     loop:true,
     margin:10,
     nav:true,
-    navText: ["<div class='position-absolute top-50 translate-middle-y' style='left:30px;'>"+leftArrow+"</div>","<div class='position-absolute top-50 translate-middle-y' style='right:30px;'>"+rightArrow+"</div>"],
+    navText: ["<div class='position-absolute top-50 translate-middle-y' style='left:17px;'>"+leftArrow+"</div>","<div class='position-absolute top-50 translate-middle-y' style='right:17px;'>"+rightArrow+"</div>"],
     responsive:{
         0:{
             items:1

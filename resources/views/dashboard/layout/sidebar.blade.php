@@ -28,20 +28,69 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        Location
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Blog</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Master Blog:</h6>
+            <a class="collapse-item" href="{{url('dashboard/blog')}}">Blog</a>
+            <a class="collapse-item" href="{{url('dashboard/blog-category')}}">Blog Category</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Banner
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('dashboard/blog')}}">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Banner</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Category
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('dashboard/blog-category')}}">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Category</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Location
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Users</span>
+          <i class="fas fa-fw fa-map"></i>
+          <span>Location</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Master Users:</h6>
-            <a class="collapse-item" href="#">Buttons</a>
-            <a class="collapse-item" href="#">Cards</a>
+            <h6 class="collapse-header">Master Location:</h6>
+            <a class="collapse-item" href="#">City</a>
+            <a class="collapse-item" href="#">Province</a>
           </div>
         </div>
       </li>

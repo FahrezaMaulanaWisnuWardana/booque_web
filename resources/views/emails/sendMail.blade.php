@@ -7,7 +7,7 @@
     <h1>{{ $details['title'] }}</h1>
     <p>API Key Name : {{ $details['name'] }}</p>
     <p>API Key : {{ $details['key'] }}</p>
-    <p>Note : {{ $details['note'] }}</p>
+    <p>Note : {{ $details['msg'] }}</p>
    
     <p>Thank you</p>
 </body>

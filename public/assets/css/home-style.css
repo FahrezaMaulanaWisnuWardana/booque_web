@@ -116,8 +116,11 @@ header ul li a{
 }
 /*EndHome*/
 
-/*Team*/
-/*EndTeam*/
+/*Blog*/
+.blog-container{
+	margin-top: 100px;
+}
+/*EndBlog*/
 .circle{
 	position: absolute;
 	top: 0;

@@ -45,6 +45,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 	Route::post("tambah-buku",[BookController::class,'addBook']);
 	Route::post("buku",[BookController::class,'listBook']);
 	Route::post("buku-sekitar",[BookController::class,'nearestBook']);
+	// Nearest 
+	Route::post("area-sekitar",[BookController::class,'nearestLocation']);
 });
 
 Route::post("test",[UserController::class,'index']);

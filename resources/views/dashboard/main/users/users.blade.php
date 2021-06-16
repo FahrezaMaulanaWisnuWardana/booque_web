@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Dashboard')
+@section('title', 'List Users')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -7,6 +7,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <body id="page-top">
@@ -25,14 +26,15 @@
       <div id="content">
 
         <!-- Topbar -->
-    		  @include('dashboard.layout.topbar')
+    		@include('dashboard.layout.topbar')
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Generate API Key</h6>
+            <div class="card-header py-3 d-flex justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">List Users</h6>
+              <a class="m-0 font-weight-bold text-primary" href="{{url('dashboard/user-add')}}"><i class="fas fa fa-plus"></i></a>
             </div>
             <div class="card-body">
 				@if ($errors->any())
@@ -49,35 +51,14 @@
 				    <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
 				  </div>
 				@endif
-            	<form method="POST" action="{{url('generate-key')}}">
-            		@csrf
-            		<div class="form-group">
-            			<label>Key Name</label>
-            			<input type="text" name="keyname" class="form-control">
-            		</div>
-            		<div class="form-group">
-            			<label>Email</label>
-            			<input type="email" name="email" value="{{Auth::user()->email}}" {{(Auth::user()->level!=="admin"?'readonly':'')}} class="form-control">
-            		</div>
-            		<button class="btn btn-primary form-control" type="submit">Generate</button>
-            	</form>
-            </div>
-          </div>
-          <!-- Collapsable Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Accordion -->
-            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-              <h6 class="m-0 font-weight-bold text-primary">List API</h6>
-            </a>
-            <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
-              <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>No</th>
                       <th>Name</th>
+                      <th>Email</th>
+                      <th>Level</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -85,20 +66,33 @@
                     <tr>
                       <th>No</th>
                       <th>Name</th>
+                      <th>Email</th>
+                      <th>Level</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    @foreach ($apikey as $key)
+                    @foreach ($user as $data)
                       <tr>
                         <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$key->name}}</td>
-                        <td class="text-center"><a href="#" class="btn btn-danger disabled">Hapus</a></td>
+                        <td class="text-center">{{$data->name}}</td>
+                        <td class="text-center">{{$data->email}}</td>
+                        <td class="text-center">{{$data->level}}</td>
+                        <td class="text-center">
+                          <form action="{{url('dashboard/user-delete',$data->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="btn-group">
+                              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                              <a href="{{url('dashboard/user-p-edit',$data->id)}}" class="btn btn-outline-warning"><i class="fas fa-key"></i></a>
+                              <a href="{{url('dashboard/user-edit',$data->id)}}" class="btn btn-outline-primary"><i class="fas fa-pen"></i></a>
+                            </div>
+                          </form>
+                        </td>
                       </tr>
                     @endforeach
                   </tbody>
                 </table>
-              </div>
               </div>
             </div>
           </div>
@@ -141,4 +135,10 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/dashboard/js/sb-admin-2.min.js')}}"></script>
+  <!-- Page level plugins -->
+  <script src="{{asset('assets/dashboard/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{{asset('assets/dashboard/js/demo/datatables-demo.js')}}"></script>
 @endsection

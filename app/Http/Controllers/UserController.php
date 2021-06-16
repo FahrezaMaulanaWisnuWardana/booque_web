@@ -27,7 +27,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect('/dashboard');
         }
-        return redirect('booque-login')->withSuccess('Oppes! Silahkan Cek Inputanmu');
+        return redirect('booque-login')->withErrors('Oppes! Silahkan Cek Inputanmu');
     }
     function logout(Request $request) {
         $request->session()->flush();

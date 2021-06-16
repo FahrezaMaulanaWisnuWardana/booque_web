@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'List Users')
+@section('title', 'List Blog')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -16,7 +16,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    	@include('dashboard.layout.sidebar')
+      @include('dashboard.layout.sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -26,59 +26,63 @@
       <div id="content">
 
         <!-- Topbar -->
-    		@include('dashboard.layout.topbar')
+        @include('dashboard.layout.topbar')
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">List Users</h6>
-              <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa fa-plus"></i></h6>
+              <h6 class="m-0 font-weight-bold text-primary">List Artikel Blog</h6>
+              <a class="m-0 font-weight-bold text-primary" href="{{url('/dashboard/tambah-blog')}}"><i class="fas fa fa-plus"></i></a>
             </div>
             <div class="card-body">
-				@if ($errors->any())
-				  <div class="alert alert-danger">
-				      <ul>
-				          @foreach ($errors->all() as $error)
-				              <li>{{ $error }}</li>
-				          @endforeach
-				      </ul>
-				  </div>
-				@endif
-				@if (Session::has('success'))
-				  <div class="alert alert-success">
-				    <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
-				  </div>
-				@endif
+        @if ($errors->any())
+          <div class="alert alert-danger">
+              @foreach ($errors->all() as $error)
+                  {{ $error }}<br>
+              @endforeach
+          </div>
+        @endif
+        @if (Session::has('success'))
+          <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
+          </div>
+        @endif
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Level</th>
+                      <th>Judul</th>
+                      <th>Category</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>No</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Level</th>
+                      <th>Judul</th>
+                      <th>Category</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    @foreach ($user as $data)
+                    @foreach ($blog as $data)
                       <tr>
                         <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$data->name}}</td>
-                        <td class="text-center">{{$data->email}}</td>
-                        <td class="text-center">{{$data->level}}</td>
-                        <td class="text-center"><a href="#" class="btn btn-danger">Hapus</a></td>
+                        <td class="text-center">{{$data->article_name}}</td>
+                        <td class="text-center">{{$data->category_name}}</td>
+                        <td class="text-center">
+                          <div class="btn-group">
+                            <form action="{{url('dashboard/delete-blog',$data->blog_id)}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                              <a href="{{url('dashboard/edit-blog',$data->blog_id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            </form>
+                          </div>
+                        </td>
                       </tr>
                     @endforeach
                   </tbody>
