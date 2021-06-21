@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +28,7 @@ class BlogCategoryController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
         DB::table('blog_category')->insert(['category_name'=>$req->category]);
-        return redirect('dashboard/blog-category')->withSuccess('Berhasil hapus kategori');
+        return redirect('dashboard/blog-category')->withSuccess('Berhasil tambah kategori');
     }
     function deleteCategoryBlog($id){
         $blog = BlogCategoryModel::find($id);

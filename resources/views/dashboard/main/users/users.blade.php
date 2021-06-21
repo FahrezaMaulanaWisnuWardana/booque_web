@@ -39,11 +39,9 @@
             <div class="card-body">
 				@if ($errors->any())
 				  <div class="alert alert-danger">
-				      <ul>
 				          @foreach ($errors->all() as $error)
-				              <li>{{ $error }}</li>
+				              <i class="fas fa-times"></i>{{ $error }}<br>
 				          @endforeach
-				      </ul>
 				  </div>
 				@endif
 				@if (Session::has('success'))

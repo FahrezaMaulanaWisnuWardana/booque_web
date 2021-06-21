@@ -11,7 +11,7 @@ Belom ada
 ## Profile
 - Update Profile 
 
-**POST** - /api/update-profile/{id}
+**POST** - /api/v1/update-profile/{id}
 
 **PARAMETER**
 Parameter | Mandatory
@@ -23,7 +23,7 @@ city_id | N
 province_id | N
 
 - Detail Profile
-**POST** - /api/profile
+**POST** - /api/v1/profile
 
 **PARAMETER**
 Parameter | Mandatory
@@ -33,7 +33,7 @@ id | Y
 ### Login
 - Login OAUTH
 
-**POST** - /api/login-oauth
+**POST** - /api/v1/login-oauth
 
 **PARAMETER**
 Parameter | Mandatory
@@ -42,7 +42,7 @@ email | Y
 
 - Login Default
 
-**POST** - /api/login
+**POST** - /api/v1/login
 
 **PARAMETER**
 Parameter | Mandatory
@@ -53,7 +53,7 @@ password | Y
 ### Register
 - Regiter Default
 
-**POST** - /api/daftar
+**POST** - /api/v1/daftar
 
 **PARAMETER**
 
@@ -78,7 +78,7 @@ email | Y -->
 
 - Tambah Buku
 
-**POST** - /api/tambah-buku
+**POST** - /api/v1/tambah-buku
 
 **PARAMETER**
 Parameter | Mandatory
@@ -99,7 +99,7 @@ province_id | Y
 
 - Buku (List Buku dan Pencarian)
 
-**POST** - /api/buku
+**POST** - /api/v1/buku
 
 **PARAMETER**
 Parameter | Mandatory
@@ -110,7 +110,7 @@ Jika Parameter terpenuhi maka akan menampilkan buku sesuai dengan isi dari param
 
 - List Buku Sekitar
 
-**POST** - /api/buku-sekitar
+**POST** - /api/v1/buku-sekitar
 
 **PARAMETER**
 Parameter | Mandatory

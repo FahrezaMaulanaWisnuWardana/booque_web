@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'List Users')
+@section('title', 'List Blog Category')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

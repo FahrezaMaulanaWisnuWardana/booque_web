@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Add Blog Category')
+@section('title', 'Add City')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -32,7 +32,7 @@
         <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Add Blog Category</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Add City</h6>
             </div>
             <div class="card-body">
               @if ($errors->any())
@@ -42,11 +42,27 @@
                     @endforeach
                 </div>
               @endif
-              <form method="POST" action="{{url('dashboard/a-blog-category')}}" enctype="multipart/form-data">
+              <form method="POST" action="{{route('city.store')}}">
                 @csrf
               <div class="form-group">
-                <label for="title-category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="title-category" name="category">
+                <label for="city" class="form-label">Province</label>
+                <select class="form-control" name="province_id">
+                  @foreach($province as $provinsi)
+                    <option value="{{$provinsi->id}}">{{$provinsi->province_name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city_name">
+              </div>
+              <div class="form-group">
+                <label for="lat" class="form-label">Latitude</label>
+                <input type="text" class="form-control" id="lat" name="latitude">
+              </div>
+              <div class="form-group">
+                <label for="lng" class="form-label">Longitude</label>
+                <input type="text" class="form-control" id="lng" name="longitude">
               </div>
               <div class="form-group">
                 <input type="submit" value="buat" class="form-control btn btn-primary">

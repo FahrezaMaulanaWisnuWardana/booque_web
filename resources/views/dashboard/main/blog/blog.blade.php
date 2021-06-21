@@ -74,14 +74,14 @@
                         <td class="text-center">{{$data->article_name}}</td>
                         <td class="text-center">{{$data->category_name}}</td>
                         <td class="text-center">
-                          <div class="btn-group">
                             <form action="{{url('dashboard/delete-blog',$data->blog_id)}}" method="POST">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                              <a href="{{url('dashboard/edit-blog',$data->blog_id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                              <div class="btn-group">
+                                  <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                  <a href="{{url('dashboard/edit-blog',$data->blog_id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                              </div>
                             </form>
-                          </div>
                         </td>
                       </tr>
                     @endforeach

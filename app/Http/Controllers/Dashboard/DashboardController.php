@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +16,19 @@ class DashboardController extends Controller
 {
     function index(){
         $data = [
-            'apikey'=> DB::table('personal_access_tokens')->select('name')->get()
+            'apikey'=> DB::table('personal_access_tokens')->select('id','name','tokenable_id')->get()
         ];
         return view('dashboard.main.index',$data);
     }
     function generateKey(Request $req){
+        request()->validate($rules = [
+            'keyname' => 'required',
+            'email'=>'required|email'
+        ]);
         $user= User::where('email', $req->email)->first();
+        if ($user===null) {
+            return redirect()->back()->withErrors('Pengguna tidak ditemukan');
+        }
         $token = explode("|", $user->createToken($req->keyname)->plainTextToken);
         $response = [
             'user' => $user,
@@ -34,6 +43,15 @@ class DashboardController extends Controller
         ];
         \Mail::to($req->email)->send(new \App\Mail\sendMail($details));
         return redirect()->back()->withSuccess('Cek email untuk detail credentials API');
+    }
+    function destroyKey($id,$user){
+        $user= User::where('id', $user)->first();
+        try {
+            $user->tokens()->where('id', $id)->delete();
+            return redirect()->back()->withSuccess('Berhasil Dihapus');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors('Gagal Dihapus');
+        }
     }
     function users(){
         $data = [
@@ -50,10 +68,10 @@ class DashboardController extends Controller
             'email'=>'required|email|unique:users',
             'password'=>['required','confirmed']
         ]);
-        $validator = Validator::make($req->all(),$rules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+        // $validator = Validator::make($req->all(),$rules);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
         $arr = [
             'name'=>$req->name,
             'email'=>$req->email,
@@ -93,10 +111,10 @@ class DashboardController extends Controller
             'name' => 'required',
             'email'=>'required|email'
         ]);
-        $validator = Validator::make($req->all(),$rules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+        // $validator = Validator::make($req->all(),$rules);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
         $arr =[
             'name'=>$req->name,
             'email'=>$req->email,
@@ -120,10 +138,10 @@ class DashboardController extends Controller
         request()->validate($rules = [
             'password'=>['required','confirmed']
         ]);
-        $validator = Validator::make($req->all(),$rules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+        // $validator = Validator::make($req->all(),$rules);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
         try {
             User::where('id',$id)->update(['password'=>Hash::make($req->password)]);
             return redirect('dashboard/user')->withSuccess('Berhasil ubah password pengguna');

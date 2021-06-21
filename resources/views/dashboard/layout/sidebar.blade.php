@@ -50,11 +50,18 @@
       <hr class="sidebar-divider">
 
       <!-- Heading -->
+      <div class="sidebar-heading mb-2">
+        Booque App Master
+      </div>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
       <div class="sidebar-heading">
         Banner
       </div>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('dashboard/blog')}}">
+        <a class="nav-link" href="{{route('banner.index')}}">
           <i class="fas fa-fw fa-book"></i>
           <span>Banner</span></a>
       </li>
@@ -67,8 +74,8 @@
         Category
       </div>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('dashboard/blog-category')}}">
-          <i class="fas fa-fw fa-book"></i>
+        <a class="nav-link" href="{{route('book-category.index')}}">
+          <i class="fas fa-fw fa-code-branch"></i>
           <span>Category</span></a>
       </li>
 
@@ -89,8 +96,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Master Location:</h6>
-            <a class="collapse-item" href="#">City</a>
-            <a class="collapse-item" href="#">Province</a>
+            <a class="collapse-item" href="{{route('city.index')}}">City</a>
+            <a class="collapse-item" href="{{route('province.index')}}">Province</a>
           </div>
         </div>
       </li>

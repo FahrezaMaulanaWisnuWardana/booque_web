@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Add Blog Category')
+@section('title', 'Add Banner')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -7,6 +7,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 @section('content')
 <body id="page-top">
@@ -32,7 +33,7 @@
         <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Add Blog Category</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Add Banner</h6>
             </div>
             <div class="card-body">
               @if ($errors->any())
@@ -42,14 +43,30 @@
                     @endforeach
                 </div>
               @endif
-              <form method="POST" action="{{url('dashboard/a-blog-category')}}" enctype="multipart/form-data">
+              <form method="POST" action="{{route('banner.update',$banner->id)}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
               <div class="form-group">
-                <label for="title-category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="title-category" name="category">
+                <label for="title-blog" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title-blog" name="tittle" value="{{$banner->tittle}}">
               </div>
               <div class="form-group">
-                <input type="submit" value="buat" class="form-control btn btn-primary">
+                <label for="title-blog" class="form-label">Aktiv</label>
+                <select name="is_active" class="form-control">
+                  <option value="1" {{$banner->is_active==="1" ?'selected':''}}>Aktiv</option>
+                  <option value="2" {{$banner->is_active==="2" ?'selected':''}}>Non Aktiv</option>
+                </select>
+              </div>
+                <label class="form-label">Banner</label>
+              <div class="custom-file mb-4">
+                <input type="file" class="custom-file-input" id="customFile" name="image">
+                <label class="custom-file-label" for="customFile">Pilih Gambar</label>
+              </div>
+              <div class="w-25 mx-auto">
+                 <img src="{{asset('storage/banner/'.$banner->image)}}" class="w-100 mb-4 mx-auto">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Edit" class="form-control btn btn-primary">
               </div>
               </form>
             </div>
@@ -93,4 +110,15 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/dashboard/js/sb-admin-2.min.js')}}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $('#customFile').on('change',function(){
+          //get the file name
+          var fileName = $(this).val();
+          //replace the "Choose a file" label
+          $(this).next('.custom-file-label').html(fileName);
+      })
+    });
+  </script>
 @endsection

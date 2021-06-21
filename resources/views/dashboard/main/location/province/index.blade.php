@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Dashboard')
+@section('title', 'List Province')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -7,6 +7,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <body id="page-top">
@@ -15,7 +16,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    	@include('dashboard.layout.sidebar')
+      @include('dashboard.layout.sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -25,78 +26,64 @@
       <div id="content">
 
         <!-- Topbar -->
-    		  @include('dashboard.layout.topbar')
+        @include('dashboard.layout.topbar')
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Generate API Key</h6>
+            <div class="card-header py-3 d-flex justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">List Category Blog</h6>
+              <a class="m-0 font-weight-bold text-primary" href="{{route('province.create')}}"><i class="fas fa fa-plus"></i></a>
             </div>
             <div class="card-body">
-				@if ($errors->any())
-				  <div class="alert alert-danger">
-		          @foreach ($errors->all() as $error)
-		              <i class="fas fa-times"></i> {{ $error }}<br>
-		          @endforeach
-				  </div>
-				@endif
-				@if (Session::has('success'))
-				  <div class="alert alert-success">
-				    <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
-				  </div>
-				@endif
-            	<form method="POST" action="{{url('dashboard/generate-key')}}">
-            		@csrf
-            		<div class="form-group">
-            			<label>Key Name</label>
-            			<input type="text" name="keyname" class="form-control">
-            		</div>
-            		<div class="form-group">
-            			<label>Email</label>
-            			<input type="email" name="email" value="{{Auth::user()->email}}" {{(Auth::user()->level!=="admin"?'readonly':'')}} class="form-control">
-            		</div>
-            		<button class="btn btn-primary form-control" type="submit">Generate</button>
-            	</form>
-            </div>
+        @if ($errors->any())
+          <div class="alert alert-danger">
+              @foreach ($errors->all() as $error)
+                  {{ $error }}<br>
+              @endforeach
           </div>
-          <!-- Collapsable Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Accordion -->
-            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-              <h6 class="m-0 font-weight-bold text-primary">List API</h6>
-            </a>
-            <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
-              <div class="card-body">
+        @endif
+        @if (Session::has('success'))
+          <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
+          </div>
+        @endif
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Name</th>
+                      <th>Judul</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>No</th>
-                      <th>Name</th>
+                      <th>Judul</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    @foreach ($apikey as $key)
+                    @foreach ($province as $data)
                       <tr>
                         <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$key->name}}</td>
-                        <td class="text-center"><a href="{{url('dashboard/d-key/'.$key->id.'/'.$key->tokenable_id)}}" class="btn btn-danger">Hapus</a></td>
+                        <td class="text-center">{{$data->province_name}}</td>
+                        <td class="text-center">
+                            <form action="{{route('province.destroy',$data->id)}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <div class="btn-group">
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <a href="{{route('province.edit',$data->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                              </div>
+                            </form>
+                        </td>
                       </tr>
                     @endforeach
                   </tbody>
                 </table>
-              </div>
               </div>
             </div>
           </div>
@@ -139,4 +126,10 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/dashboard/js/sb-admin-2.min.js')}}"></script>
+  <!-- Page level plugins -->
+  <script src="{{asset('assets/dashboard/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{{asset('assets/dashboard/js/demo/datatables-demo.js')}}"></script>
 @endsection
