@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'List Book Category')
+@section('title', 'List Book')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -33,8 +33,7 @@
         <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">List Book Category</h6>
-              <a class="m-0 font-weight-bold text-primary" href="{{route('book-category.create')}}"><i class="fas fa fa-plus"></i></a>
+              <h6 class="m-0 font-weight-bold text-primary">List Book</h6>
             </div>
             <div class="card-body">
         @if ($errors->any())
@@ -54,29 +53,42 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Judul</th>
+                      <th>Buku</th>
+                      <th>Tahun</th>
+                      <th>Penerbit</th>
+                      <th>Kategori</th>
+                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>No</th>
-                      <th>Judul</th>
+                      <th>Buku</th>
+                      <th>Tahun</th>
+                      <th>Penerbit</th>
+                      <th>Kategori</th>
+                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    @foreach ($book_category as $data)
+                    @foreach ($book as $data)
                       <tr>
                         <td class="text-center">{{$loop->iteration}}</td>
+                        <td class="text-center">{{$data->book_name}}</td>
+                        <td class="text-center">{{$data->year}}</td>
+                        <td class="text-center">{{$data->publisher}}</td>
                         <td class="text-center">{{$data->category_name}}</td>
+                        <td class="text-center">{{$data->status === "1" ? 'Available' : 'Sold'}}</td>
                         <td class="text-center">
-                            <form action="{{route('book-category.destroy',$data->id)}}" method="POST">
+                            <form action="{{route('book.destroy',$data->id)}}" method="POST">
                               @csrf
                               @method('DELETE')
                               <div class="btn-group">
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                <a href="{{route('book-category.edit',$data->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                <a href="{{route('book.show',$data->id)}}" class="btn btn-outline-warning"><i class="fas fa-eye"></i></a>
+                                <a href="{{route('book.edit',$data->id)}}" class="btn btn-outline-primary"><i class="fas fa-pen"></i></a>
                               </div>
                             </form>
                         </td>

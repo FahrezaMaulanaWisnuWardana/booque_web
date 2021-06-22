@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\BookCategoryController;
 use App\Http\Controllers\Dashboard\ProvinceController;
 use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\BookController;
 
 
 Route::get('/',[HomeController::class,'index']);
@@ -56,13 +57,15 @@ Route::group(['middleware' => ['\App\Http\Middleware\Cek_login']], function () {
         Route::delete('/d-blog-category/{id}',[BlogCategoryController::class,'deleteCategoryBlog']);
         // Book Category App C R U D
         Route::resource('book-category',BookCategoryController::class);
+
         // Location
         // Province App C R U D
         Route::resource('province',ProvinceController::class);
         // City App C R U D
         Route::resource('city',CityController::class);
         // End Location
-
+        // Book R U D
+        Route::resource('book',BookController::class);
         // Banner C R U D
         Route::resource('banner',BannerController::class);
         // Generate API KEY

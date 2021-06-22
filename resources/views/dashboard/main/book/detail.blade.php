@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'List Book Category')
+@section('title', 'Detail Book')
 @section('header')
   <!-- Custom fonts for this template-->
   <link href="{{asset('assets/dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -32,58 +32,47 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">List Book Category</h6>
-              <a class="m-0 font-weight-bold text-primary" href="{{route('book-category.create')}}"><i class="fas fa fa-plus"></i></a>
-            </div>
             <div class="card-body">
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              @foreach ($errors->all() as $error)
-                  {{ $error }}<br>
-              @endforeach
-          </div>
-        @endif
-        @if (Session::has('success'))
-          <div class="alert alert-success">
-            <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
-          </div>
-        @endif
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Judul</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>Judul</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    @foreach ($book_category as $data)
-                      <tr>
-                        <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$data->category_name}}</td>
-                        <td class="text-center">
-                            <form action="{{route('book-category.destroy',$data->id)}}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <div class="btn-group">
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                <a href="{{route('book-category.edit',$data->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                              </div>
-                            </form>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+              <div class="d-flex justify-content-center">
+                  <p class="text-center">{{$book->book_name}}</p>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <img  src="{{asset('storage/user/'.$book->user_id.'/books/'.$book->thumbnail)}}" class="img-fluid">
+              </div>
+              <div class="w-75 mx-auto">
+                <div class="mt-2">
+                  <span class="badge badge-pill badge-light">{{$book->year}}</span> <span class="badge badge-pill badge-light">{{$book->category_name}}</span>
+                </div>
+                <span class="text-justify my-4 d-block">{{$book->description}}</span>
+              </div>
+              <div class="container">
+                <label>Data User : </label>
+                <div class="row">
+                  <div class="col-lg-6 col-sm-12 col-xs-12">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Name : {{$user->full_name}}</li>
+                      <li class="list-group-item">Address : {{$user->address}}</li>
+                      <li class="list-group-item">Phone : {{$user->phone}}</li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-6 col-sm-12 col-xs-12">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Email : {{$user->email}} {!! $user->is_active === "1" ? '<span class="badge badge-pill badge-primary">Active</span>':'<span class="badge badge-pill badge-warning">Not Active</span>' !!}</li>
+                      <li class="list-group-item">Province : {{$user->province_name}}</li>
+                      <li class="list-group-item">City : {{$user->city_name}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-4">
+                <form action="{{route('book.destroy',$book->id)}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                    <a href="{{route('book.edit',$book->id)}}" class="btn btn-outline-primary"><i class="fas fa-pen"></i></a>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

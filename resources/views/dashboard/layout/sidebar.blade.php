@@ -103,6 +103,19 @@
       </li>
 
       <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Book
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('book.index')}}">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Books</span></a>
+      </li>
+
+      <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->

@@ -22,52 +22,54 @@ class BookController extends Controller
         		'error'=>4,
         		'msg'=>"Akun tidak ditemukan"
 	        ];
-        }
-        if($user_d->address===null || $user_d->phone===null || $user_d->city_id===null || $user_d->province_id===null){
-        	$data = [
-        		'error'=>3,
-        		'msg'=>"Data akun belum lengkap"
-        	];
         }else{
-        	$arr = [
-        		'book_name'=>$req->book_name,
-        		'user_id'=>$req->id,
-        		'description'=>$req->description,
-        		'address'=>$req->address,
-        		'category_id'=>$req->category_id,
-        		'status'=>1,
-        		'thumbnail'=>$req->thumbnail,
-        		'author'=>$req->author,
-        		'year'=>$req->year,
-        		'publisher'=>$req->publisher,
-        		'city_id'=>$req->city_id,
-        		'province_id'=>$req->province_id,
-        		'created_at' =>  date('Y-m-d H:i:s')
-        	];
-        	DB::table('books')->insert($arr);
-        	$validator = Validator::make($req->all(), [
-        		'book_name'=>'required',
-        		'user_id'=>'required',
-        		'description'=>'required',
-        		'address'=>'required',
-        		'category_id'=>'required',
-        		'thumbnail'=>'required',
-        		'author'=>'required',
-        		'year'=>'required',
-        		'publisher'=>'required',
-        		'city_id'=>'required',
-        		'province_id'=>'required'
-        	]);
-		    if ($validator->fails()) {
-		        $data = [
+	        if($user_d->address===null || $user_d->phone===null || $user_d->city_id===null || $user_d->province_id===null){
+	        	$data = [
 	        		'error'=>3,
-	        		'msg'=>$validator->messages()
+	        		'msg'=>"Data akun belum lengkap"
+	        	];
+	        }else{
+	        	$validator = Validator::make($req->all(), [
+	        		'book_name'=>'required',
+	        		'user_id'=>'required',
+	        		'description'=>'required',
+	        		'address'=>'required',
+	        		'category_id'=>'required',
+	        		'thumbnail'=>'required|mimes:jpg,png,jpeg',
+	        		'author'=>'required',
+	        		'year'=>'required',
+	        		'publisher'=>'required',
+	        		'city_id'=>'required',
+	        		'province_id'=>'required'
+	        	]);
+			    if ($validator->fails()) {
+			        $data = [
+		        		'error'=>3,
+		        		'msg'=>$validator->messages()
+			        ];
+			    }
+	        	$req->file('thumbnail')->storeAs('user/'.$req->id.'/books',$req->file('thumbnail')->getClientOriginalName());
+	        	$arr = [
+	        		'book_name'=>$req->book_name,
+	        		'user_id'=>$req->id,
+	        		'description'=>$req->description,
+	        		'address'=>$req->address,
+	        		'category_id'=>$req->category_id,
+	        		'status'=>1,
+	        		'thumbnail'=>$req->file('thumbnail')->getClientOriginalName(),
+	        		'author'=>$req->author,
+	        		'year'=>$req->year,
+	        		'publisher'=>$req->publisher,
+	        		'city_id'=>$req->city_id,
+	        		'province_id'=>$req->province_id,
+	        		'created_at' =>  date('Y-m-d H:i:s')
+	        	];
+	        	DB::table('books')->insert($arr);
+		        $data = [
+	        		'error'=>0,
+	        		'msg'=>"Sukses menambah buku"
 		        ];
-		    }
-	        $data = [
-        		'error'=>0,
-        		'msg'=>"Sukses menambah buku"
-	        ];
+	        }
         }
         return $data;
 	}
