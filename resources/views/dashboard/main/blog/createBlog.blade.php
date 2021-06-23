@@ -47,7 +47,7 @@
                 @csrf
               <div class="form-group">
                 <label for="title-blog" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title-blog" name="title">
+                <input type="text" class="form-control" id="title-blog" name="title" value="{{ old('title') }}">
               </div>
                 <label class="form-label">Thumbnail</label>
               <div class="custom-file mb-4">
@@ -56,7 +56,7 @@
               </div>
               <div class="form-group">
                 <label for="title-blog" class="form-label">Content</label>
-                <textarea id="summernote" class="form-control" name="content"></textarea>
+                <textarea id="summernote" class="form-control" name="content">{{ old('email') }}</textarea>
               </div>
               <div class="form-group">
                 <label for="title-blog" class="form-label">Category</label>

@@ -14,7 +14,7 @@ class CreateBooqersDTable extends Migration
     public function up()
     {
         Schema::create('booqers_d', function (Blueprint $table) {
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->references('id')->on('booqers')->onDelete('cascade');
             $table->string('full_name',50);
             $table->text('address')->nullable();
             $table->string('phone',13)->nullable();

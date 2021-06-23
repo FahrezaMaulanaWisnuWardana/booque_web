@@ -7,7 +7,6 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
-  <link href="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <body id="page-top">
@@ -34,7 +33,7 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="d-flex justify-content-center">
-                  <p class="text-center">{{$book->book_name}}</p>
+                  <h1 class="text-center">{{$book->book_name}}</h1>
               </div>
               <div class="d-flex justify-content-center">
                   <img  src="{{asset('storage/user/'.$book->user_id.'/books/'.$book->thumbnail)}}" class="img-fluid">
@@ -115,10 +114,4 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/dashboard/js/sb-admin-2.min.js')}}"></script>
-  <!-- Page level plugins -->
-  <script src="{{asset('assets/dashboard/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="{{asset('assets/dashboard/js/demo/datatables-demo.js')}}"></script>
 @endsection

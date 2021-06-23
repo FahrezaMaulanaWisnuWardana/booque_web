@@ -68,10 +68,6 @@ class DashboardController extends Controller
             'email'=>'required|email|unique:users',
             'password'=>['required','confirmed']
         ]);
-        // $validator = Validator::make($req->all(),$rules);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator->errors());
-        // }
         $arr = [
             'name'=>$req->name,
             'email'=>$req->email,
@@ -111,10 +107,6 @@ class DashboardController extends Controller
             'name' => 'required',
             'email'=>'required|email'
         ]);
-        // $validator = Validator::make($req->all(),$rules);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator->errors());
-        // }
         $arr =[
             'name'=>$req->name,
             'email'=>$req->email,
@@ -138,10 +130,6 @@ class DashboardController extends Controller
         request()->validate($rules = [
             'password'=>['required','confirmed']
         ]);
-        // $validator = Validator::make($req->all(),$rules);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator->errors());
-        // }
         try {
             User::where('id',$id)->update(['password'=>Hash::make($req->password)]);
             return redirect('dashboard/user')->withSuccess('Berhasil ubah password pengguna');

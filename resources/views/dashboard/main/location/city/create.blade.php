@@ -54,15 +54,15 @@
               </div>
               <div class="form-group">
                 <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="city" name="city_name">
+                <input type="text" class="form-control" id="city" name="city_name" value="{{ old('city_name') }}">
               </div>
               <div class="form-group">
                 <label for="lat" class="form-label">Latitude</label>
-                <input type="text" class="form-control" id="lat" name="latitude">
+                <input type="text" class="form-control" id="lat" name="latitude" value="{{ old('latitude') }}">
               </div>
               <div class="form-group">
                 <label for="lng" class="form-label">Longitude</label>
-                <input type="text" class="form-control" id="lng" name="longitude">
+                <input type="text" class="form-control" id="lng" name="longitude" value="{{ old('longitude') }}">
               </div>
               <div class="form-group">
                 <input type="submit" value="buat" class="form-control btn btn-primary">

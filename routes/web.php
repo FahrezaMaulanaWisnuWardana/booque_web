@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\ProvinceController;
 use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\BookController;
+use App\Http\Controllers\Dashboard\BooqersController;
 
 
 Route::get('/',[HomeController::class,'index']);
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['\App\Http\Middleware\Cek_login']], function () {
         Route::put('/u-blog-category/{id}',[BlogCategoryController::class,'updateCategoryBlog']);
         // Category D
         Route::delete('/d-blog-category/{id}',[BlogCategoryController::class,'deleteCategoryBlog']);
+        
         // Book Category App C R U D
         Route::resource('book-category',BookCategoryController::class);
 
@@ -68,6 +70,8 @@ Route::group(['middleware' => ['\App\Http\Middleware\Cek_login']], function () {
         Route::resource('book',BookController::class);
         // Banner C R U D
         Route::resource('banner',BannerController::class);
+        // Banner C R U D
+        Route::resource('booqer',BooqersController::class);
         // Generate API KEY
         Route::post('/generate-key',[DashboardController::class,'generateKey']);
         Route::get('/d-key/{id}/{user}',[DashboardController::class,'destroyKey']);

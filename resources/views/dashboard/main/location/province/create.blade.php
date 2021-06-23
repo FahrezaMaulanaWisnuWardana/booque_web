@@ -46,7 +46,7 @@
                 @csrf
               <div class="form-group">
                 <label for="title" class="form-label">Province</label>
-                <input type="text" class="form-control" id="title" name="province_name">
+                <input type="text" class="form-control" id="title" name="province_name" value="{{ old('province') }}">
               </div>
               <div class="form-group">
                 <input type="submit" value="buat" class="form-control btn btn-primary">

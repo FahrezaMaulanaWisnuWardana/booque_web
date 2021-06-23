@@ -22,15 +22,6 @@
           <i class="fas fa-fw fa-users"></i>
           <span>Users</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Location
-      </div>
-
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -113,6 +104,19 @@
         <a class="nav-link" href="{{route('book.index')}}">
           <i class="fas fa-fw fa-book"></i>
           <span>Books</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Booqers
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('booqer.index')}}">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Booqers</span></a>
       </li>
 
       <!-- Divider -->
