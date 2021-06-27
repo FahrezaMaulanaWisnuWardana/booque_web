@@ -8,6 +8,7 @@
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/dashboard/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css" integrity="sha256-tdcssN5ck+PmJDZmao3pZxBuewye+gY3KhQTKYAJ+Y8=" crossorigin="anonymous">
 @endsection
 @section('content')
 <body id="page-top">
@@ -82,15 +83,17 @@
                         <td class="text-center">{{$data->category_name}}</td>
                         <td class="text-center">{{$data->status === "1" ? 'Available' : 'Sold'}}</td>
                         <td class="text-center">
-                            <form action="{{route('book.destroy',$data->id)}}" method="POST">
-                              @csrf
-                              @method('DELETE')
                               <div class="btn-group">
-                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger hapus-confirm" data-id="{{$loop->iteration}}">
+                                  <form action="{{route('book.destroy',$data->id)}}" method="POST" id="hapus-{{$loop->iteration}}">
+                                    @csrf
+                                    @method('DELETE')
+                                  </form>
+                                  <i class="fas fa-trash"></i>
+                                </button>
                                 <a href="{{route('book.show',$data->id)}}" class="btn btn-outline-warning"><i class="fas fa-eye"></i></a>
                                 <a href="{{route('book.edit',$data->id)}}" class="btn btn-outline-primary"><i class="fas fa-pen"></i></a>
                               </div>
-                            </form>
                         </td>
                       </tr>
                     @endforeach
@@ -144,4 +147,6 @@
 
   <!-- Page level custom scripts -->
   <script src="{{asset('assets/dashboard/js/demo/datatables-demo.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js" integrity="sha256-HutwTOHexZPk7phZTEa350wtMYt10g21BKrAlsStcvw=" crossorigin="anonymous"></script>
+  <script src="{{asset('assets/js/confirm.js')}}"></script>
 @endsection

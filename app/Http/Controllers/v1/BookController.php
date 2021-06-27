@@ -16,22 +16,73 @@ use App\Models\City;
 class BookController extends Controller
 {
 	function addBook(Request $req){
-        $user_d = DB::table('booqers_d')->where("user_id",$req->id)->first();
+        $user_d = DB::table('booqers_d')->where("user_id",$req->user_id)->first();
         if ($user_d===null) {
 	        $data = [
         		'error'=>4,
         		'msg'=>"Akun tidak ditemukan"
 	        ];
         }else{
-	        if($user_d->address===null || $user_d->phone===null || $user_d->city_id===null || $user_d->province_id===null){
-	        	$data = [
-	        		'error'=>3,
-	        		'msg'=>"Data akun belum lengkap"
-	        	];
-	        }else{
-	        	$validator = Validator::make($req->all(), [
+			if($user_d->address===null || $user_d->phone===null || $user_d->city_id===null || $user_d->province_id===null){
+				$data = [
+					'error'=>3,
+					'msg'=>"Data akun belum lengkap"
+				];
+			}else{
+				try {
+					$arr = request()->validate([
+						'book_name'=>'required',
+						'user_id'=>'required',
+						'description'=>'required',
+						'address'=>'required',
+						'category_id'=>'required',
+						'thumbnail'=>'required|mimes:jpg,png,jpeg',
+						'author'=>'required',
+						'year'=>'required',
+						'publisher'=>'required',
+						'city_id'=>'required',
+						'province_id'=>'required'
+					]);
+					$arr['thumbnail'] = $req->file('thumbnail')->getClientOriginalName();
+					DB::table('books')->insert($arr);
+					$req->file('thumbnail')->storeAs('user/'.$req->user_id.'/books',$req->file('thumbnail')->getClientOriginalName());
+					$data = [
+						'error'=>0,
+						'msg'=>"Sukses menambah buku"
+					];
+				} catch (Exception $e) {
+					$data = [
+						'msg'=>$e->getMessage()
+					];
+				}
+	        }
+        }
+        return response()->json($data);
+	}
+	function allBook(){
+		return [
+			'error'=>0,
+			'msg'=> 'All data',
+			'data'=>BookModel::all()
+		];
+	}
+	function updateBook(Request $req,$id){
+		$req->setMethod('PUT');
+	    	if ($req->file('thumbnail') === NULL) {
+	        	$arr = request()->validate([
 	        		'book_name'=>'required',
-	        		'user_id'=>'required',
+	        		'description'=>'required',
+	        		'address'=>'required',
+	        		'category_id'=>'required',
+	        		'author'=>'required',
+	        		'year'=>'required',
+	        		'publisher'=>'required',
+	        		'city_id'=>'required',
+	        		'province_id'=>'required'
+	        	]);
+	    	}else{
+	        	$arr = request()->validate([
+	        		'book_name'=>'required',
 	        		'description'=>'required',
 	        		'address'=>'required',
 	        		'category_id'=>'required',
@@ -42,71 +93,22 @@ class BookController extends Controller
 	        		'city_id'=>'required',
 	        		'province_id'=>'required'
 	        	]);
-			    if ($validator->fails()) {
-			        $data = [
-		        		'error'=>3,
-		        		'msg'=>$validator->messages()
-			        ];
-			    }
+				$arr['thumbnail'] = $req->file('thumbnail')->getClientOriginalName();
 	        	$req->file('thumbnail')->storeAs('user/'.$req->id.'/books',$req->file('thumbnail')->getClientOriginalName());
-	        	$arr = [
-	        		'book_name'=>$req->book_name,
-	        		'user_id'=>$req->id,
-	        		'description'=>$req->description,
-	        		'address'=>$req->address,
-	        		'category_id'=>$req->category_id,
-	        		'status'=>1,
-	        		'thumbnail'=>$req->file('thumbnail')->getClientOriginalName(),
-	        		'author'=>$req->author,
-	        		'year'=>$req->year,
-	        		'publisher'=>$req->publisher,
-	        		'city_id'=>$req->city_id,
-	        		'province_id'=>$req->province_id,
-	        		'created_at' =>  date('Y-m-d H:i:s')
-	        	];
-	        	DB::table('books')->insert($arr);
-		        $data = [
-	        		'error'=>0,
-	        		'msg'=>"Sukses menambah buku"
-		        ];
-	        }
-        }
-        return $data;
-	}
-	function listBook(Request $req){
-		if (is_null($req->book_name)) {
-			$res = DB::table('books')
-			->select('books.id','books.book_name','books.description','books.address','books.status','books.thumbnail','books.author','books.year','books.publisher','category.category_name','c.city_name as kota_buku','p.province_name as provinsi_buku','booqers_d.full_name','booqers_d.phone','booqers_d.address','booqers_d.phone','city.city_name','province.province_name')
-			->join('category','category.id','=','books.category_id')
-			->join('booqers_d','booqers_d.user_id','=','books.user_id')
-			->join('city','city.id','=','booqers_d.city_id')
-			->join('province','province.id','=','booqers_d.province_id')
-			->join('city as c','c.id','=','books.city_id')
-			->join('province as p','p.id','=','books.province_id')
-			->get();
-		}else{
-			$res = DB::table('books')
-			->select('books.book_name','books.description','books.address','books.status','books.thumbnail','books.author','books.year','books.publisher','category.category_name','c.city_name as kota_buku','p.province_name as provinsi_buku','booqers_d.full_name','booqers_d.phone','booqers_d.address','booqers_d.phone','city.city_name','province.province_name')
-			->join('category','category.id','=','books.category_id')
-			->join('booqers_d','booqers_d.user_id','=','books.user_id')
-			->join('city','city.id','=','booqers_d.city_id')
-			->join('province','province.id','=','booqers_d.province_id')
-			->join('city as c','c.id','=','books.city_id')
-			->join('province as p','p.id','=','books.province_id')->where("book_name","like","%".$req->book_name."%")->get();
-		}
-		return ["result"=>$res];
-	}
-	function nearestBook(Request $req){
-		$res = DB::table('books')
-		->select('books.book_name','books.description','books.address','books.status','books.thumbnail','books.author','books.year','books.publisher','category.category_name','c.city_name as kota_buku','p.province_name as provinsi_buku','booqers_d.full_name','booqers_d.phone','booqers_d.address','booqers_d.phone','city.city_name','province.province_name')
-		->join('category','category.id','=','books.category_id')
-		->join('booqers_d','booqers_d.user_id','=','books.user_id')
-		->join('city','city.id','=','booqers_d.city_id')
-		->join('province','province.id','=','booqers_d.province_id')
-		->join('city as c','c.id','=','books.city_id')
-		->join('province as p','p.id','=','books.province_id')
-		->where("c.city_name","like","%".$req->city_name."%")->get();
-		return ["result"=>$res];
+	    	}
+	    	try {
+				BookModel::where('id',$id)->update($arr);
+				$data = [
+					'error'=>0,
+					'msg'=>"Sukses update buku"
+				];
+	    	} catch (Exception $e) {
+				$data = [
+					'error'=>1,
+					'msg'=>$e->getMessage()
+				];
+	    	}
+        	return $data;
 	}
 	function nearestLocation(Request $req){
 		$city = DB::select('SELECT * FROM (SELECT id, city_name ,latitude , longitude ,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');

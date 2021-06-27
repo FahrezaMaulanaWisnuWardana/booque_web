@@ -7,6 +7,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('assets/dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css" integrity="sha256-tdcssN5ck+PmJDZmao3pZxBuewye+gY3KhQTKYAJ+Y8=" crossorigin="anonymous">
 @endsection
 @section('content')
 <body id="page-top">
@@ -91,7 +92,8 @@
                       <tr>
                         <td class="text-center">{{$loop->iteration}}</td>
                         <td class="text-center">{{$key->name}}</td>
-                        <td class="text-center"><a href="{{url('dashboard/d-key/'.$key->id.'/'.$key->tokenable_id)}}" class="btn btn-danger">Hapus</a></td>
+                        <td class="text-center"><a data-url="{{url('dashboard/d-key/'.$key->id.'/'.$key->tokenable_id)}}" href="#" id="hapus-{{$loop->iteration}}" onclick="checkLink({{$loop->iteration}},'hapus')" class="btn btn-danger">Hapus</a></td>
+                        
                       </tr>
                     @endforeach
                   </tbody>
@@ -139,4 +141,6 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/dashboard/js/sb-admin-2.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js" integrity="sha256-HutwTOHexZPk7phZTEa350wtMYt10g21BKrAlsStcvw=" crossorigin="anonymous"></script>
+  <script src="{{asset('assets/js/confirm.js')}}"></script>
 @endsection
