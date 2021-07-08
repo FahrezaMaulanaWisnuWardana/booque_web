@@ -2,7 +2,9 @@
 Dibuat dengan Laravel 8 
 
 ## Auth API
-Belom ada
+Bearer Token
+# Note
+# Header : Accept : Application/json
 
 ## Route API
 
@@ -123,8 +125,6 @@ Parameter | Mandatory
 --------- | ---------
 status | Y
 
-
-
 - Buku (Buku berdasarkan area terdekat)
 
 **POST** - /api/v1/buku
@@ -136,7 +136,7 @@ lat | Y
 lng | Y
 dst | N
 jml | N
-
+- Cari Buku By name
 **POST** - /api/v1/buku-cari
 
 **REQUEST**
@@ -148,11 +148,38 @@ book_name | Y
 dst | N
 jml | N
 
+- Buku Detail By Id
 **POST** - /api/v1/buku-detail
 
 **REQUEST**
 Parameter | Mandatory
 --------- | ---------
 id | Y
+
+### Category
+- Category 
+
+**POST** - /api/v1/category/{buku?}/{id?}
+### id = Category Id
+## Jika kedua parameter terpenuhi maka silahkan kirim request dibawah
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+lat | Y
+lng | Y
+dst | N
+jml | N
+
+### Kota
+- Kota
+**GET** - /api/v1/kota/{province_id?}
+- Cari Kota By name
+**GET** - /api/v1/kota/search/{city_name?}
+
+### Provinsi
+- Kota
+**GET** - /api/v1/provinsi/{id?}
+- Cari Kota By name
+**GET** - /api/v1/provinsi/search/{province_name?}
 
 Jika Parameter terpenuhi maka akan menampilkan buku sesuai dengan isi dari paramater
