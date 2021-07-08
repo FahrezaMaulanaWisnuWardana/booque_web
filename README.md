@@ -80,11 +80,11 @@ email | Y -->
 
 **POST** - /api/v1/tambah-buku
 
-**PARAMETER**
+**REQUEST**
 Parameter | Mandatory
 --------- | ---------
 book_name | Y
-id		  | Y
+user_id		  | Y
 description | Y
 address		| Y
 category_id | Y
@@ -92,29 +92,67 @@ thumbnail 	| Y
 author 		| Y
 year 		| Y
 publisher 	| Y
-city_id 	|
+city_id 	| Y
 province_id | Y
 
+- Update Buku
+
+**POST** - /api/v1/update-buku/{id}
+
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+book_name | Y
+description | Y
+address		| Y
+category_id | Y
+status | Y
+thumbnail 	| N
+author 		| Y
+year 		| Y
+publisher 	| Y
+city_id 	| Y
+province_id | Y
+
+- Update Status Buku
+
+**POST** - /api/v1/update-status-buku/{id}
+
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+status | Y
 
 
-- Buku (List Buku dan Pencarian)
+
+- Buku (Buku berdasarkan area terdekat)
 
 **POST** - /api/v1/buku
 
-**PARAMETER**
+**REQUEST**
 Parameter | Mandatory
 --------- | ---------
-book_name | N
+lat | Y
+lng | Y
+dst | N
+jml | N
+
+**POST** - /api/v1/buku-cari
+
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+lat | Y
+lng | Y
+book_name | Y
+dst | N
+jml | N
+
+**POST** - /api/v1/buku-detail
+
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+id | Y
 
 Jika Parameter terpenuhi maka akan menampilkan buku sesuai dengan isi dari paramater
-
-- List Buku Sekitar
-
-**POST** - /api/v1/buku-sekitar
-
-**PARAMETER**
-Parameter | Mandatory
---------- | ---------
-city_name | Y
-
-Jika Parameter terpenuhi maka akan menampilkan buku sesuai dengan daerah tersebut

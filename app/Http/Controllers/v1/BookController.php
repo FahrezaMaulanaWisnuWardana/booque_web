@@ -59,11 +59,56 @@ class BookController extends Controller
         }
         return response()->json($data);
 	}
-	function allBook(){
+	function allBook(Request $req){
+		$city = DB::select('SELECT * FROM (SELECT id,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');
+		$arr = [];
+		foreach ($city as $data => $value) {
+			array_push($arr,$value->id);
+		}
+		$data = DB::table('books')
+					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->join('booqers_d as user','user.user_id','=','books.user_id')
+					->join('category','category.id','=','books.category_id')
+					->where('books.city_id',$arr)
+					->get();
 		return [
 			'error'=>0,
 			'msg'=> 'All data',
-			'data'=>BookModel::all()
+			'data'=>$data
+		];
+	}
+	function likeBook(Request $req){
+		$city = DB::select('SELECT * FROM (SELECT id,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');
+		$arr = [];
+		foreach ($city as $data => $value) {
+			array_push($arr,$value->id);
+		}
+		$data = DB::table('books')
+					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->join('booqers_d as user','user.user_id','=','books.user_id')
+					->join('category','category.id','=','books.category_id')
+					->where([
+								['books.book_name','LIKE','%'.$req->book_name.'%'],
+								['books.city_id',$arr]
+							])
+					->get();
+		return [
+			'error'=>0,
+			'msg'=> 'All data',
+			'data'=>$data
+		];
+	}
+	function detailBook(Request $req){
+		$data = DB::table('books')
+					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->join('booqers_d as user','user.user_id','=','books.user_id')
+					->join('category','category.id','=','books.category_id')
+					->where('books.id',$req->id)
+					->first();
+		return [
+			'error'=>0,
+			'msg'=> 'All data',
+			'data'=>$data
 		];
 	}
 	function updateBook(Request $req,$id){
@@ -74,6 +119,7 @@ class BookController extends Controller
 	        		'description'=>'required',
 	        		'address'=>'required',
 	        		'category_id'=>'required',
+	        		'status'=>'required',
 	        		'author'=>'required',
 	        		'year'=>'required',
 	        		'publisher'=>'required',
@@ -86,6 +132,7 @@ class BookController extends Controller
 	        		'description'=>'required',
 	        		'address'=>'required',
 	        		'category_id'=>'required',
+	        		'status'=>'required',
 	        		'thumbnail'=>'required|mimes:jpg,png,jpeg',
 	        		'author'=>'required',
 	        		'year'=>'required',
@@ -110,8 +157,23 @@ class BookController extends Controller
 	    	}
         	return $data;
 	}
-	function nearestLocation(Request $req){
-		$city = DB::select('SELECT * FROM (SELECT id, city_name ,latitude , longitude ,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');
-		return ["result"=>$city];
+	function updateBookStatus(Request $req,$id){
+		$req->setMethod('PUT');
+			$arr = request()->validate([
+				'status'=>'required'
+			]);
+	    	try {
+				BookModel::where('id',$id)->update($arr);
+				$data = [
+					'error'=>0,
+					'msg'=>"Sukses update status buku"
+				];
+	    	} catch (Exception $e) {
+				$data = [
+					'error'=>1,
+					'msg'=>$e->getMessage()
+				];
+	    	}
+        	return $data;
 	}
 }

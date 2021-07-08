@@ -25,7 +25,7 @@ class DashboardController extends Controller
             'keyname' => 'required',
             'email'=>'required|email'
         ]);
-        $user= User::where('email', $req->email)->first();
+        $user = User::where('email', $req->email)->first();
         if ($user===null) {
             return redirect()->back()->withErrors('Pengguna tidak ditemukan');
         }

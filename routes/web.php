@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\BooqersController;
+use App\Http\Controllers\Dashboard\TransactionController;
 
 
 Route::get('/',[HomeController::class,'index']);
@@ -72,6 +73,8 @@ Route::group(['middleware' => ['\App\Http\Middleware\Cek_login']], function () {
         Route::resource('banner',BannerController::class);
         // Banner C R U D
         Route::resource('booqer',BooqersController::class);
+        // Banner C R U D
+        Route::resource('transaksi',TransactionController::class);
         // Generate API KEY
         Route::post('/generate-key',[DashboardController::class,'generateKey']);
         Route::get('/d-key/{id}/{user}',[DashboardController::class,'destroyKey']);

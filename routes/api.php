@@ -3,9 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\CityController;
+use App\Http\Controllers\v1\ProvinceController;
 use App\Http\Controllers\v1\BooqersController;
 use App\Http\Controllers\v1\LoginAppController;
 use App\Http\Controllers\v1\BookController;
+use App\Http\Controllers\v1\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,12 @@ use App\Http\Controllers\v1\BookController;
 Route::group(['middleware' => 'auth:sanctum'], function(){
 	// Group Route
 	Route::group(['namespace'=>'v1','prefix'=>'v1'],function(){
+		// Province Route
+		Route::get("provinsi/{id?}",[ProvinceController::class,'index']);
+		Route::get("provinsi/search/{province_name}",[ProvinceController::class,'search']);
 		// Kota Route
 		Route::get("kota/{province_id?}",[CityController::class,'index']);
-		Route::get("kota/search/{city_name?}",[CityController::class,'search']);
+		Route::get("kota/search/{city_name}",[CityController::class,'search']);
 
 		// Register Route
 		Route::post("daftar",[BooqersController::class,'store']);
@@ -44,9 +49,11 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		// Buku Route
 		Route::post("tambah-buku",[BookController::class,'addBook']);
 		Route::post("update-buku/{id}",[BookController::class,'updateBook']);
+		Route::post("update-status-buku/{id}",[BookController::class,'updateBookStatus']);
 		Route::post("buku",[BookController::class,'allBook']);
-		Route::post("buku-sekitar",[BookController::class,'nearestBook']);
-		// Nearest 
-		Route::post("area-sekitar",[BookController::class,'nearestLocation']);
+		Route::post("buku-cari",[BookController::class,'likeBook']);
+		Route::post("buku-detail",[BookController::class,'detailBook']);
+		// Category 
+		Route::post("category/{buku?}/{id?}",[CategoryController::class,'index']);
 	});
 });

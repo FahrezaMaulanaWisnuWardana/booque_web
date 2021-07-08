@@ -121,6 +121,19 @@
       </li>
 
       <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Transaksi
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('transaksi.index')}}">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Transaksi</span></a>
+      </li>
+
+      <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
