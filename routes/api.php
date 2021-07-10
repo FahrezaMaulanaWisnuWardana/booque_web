@@ -7,6 +7,7 @@ use App\Http\Controllers\v1\ProvinceController;
 use App\Http\Controllers\v1\BooqersController;
 use App\Http\Controllers\v1\LoginAppController;
 use App\Http\Controllers\v1\BookController;
+use App\Http\Controllers\v1\TransactionController;
 use App\Http\Controllers\v1\CategoryController;
 
 /*
@@ -53,6 +54,11 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		Route::post("buku",[BookController::class,'allBook']);
 		Route::post("buku-cari",[BookController::class,'likeBook']);
 		Route::post("buku-detail",[BookController::class,'detailBook']);
+		Route::delete("hapus-buku/{id}",[BookController::class,'deleteBook']);
+		// Transaction
+		Route::post("transaksi-buku",[TransactionController::class,'store']);
+		Route::post("transaksi-ku/{user_id}",[TransactionController::class,'index']);
+		Route::post("transaksi-detail/{user_id}/{trx_id}",[TransactionController::class,'show']);
 		// Category 
 		Route::post("category/{buku?}/{id?}",[CategoryController::class,'index']);
 	});

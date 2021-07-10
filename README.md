@@ -136,6 +136,7 @@ lat | Y
 lng | Y
 dst | N
 jml | N
+
 - Cari Buku By name
 **POST** - /api/v1/buku-cari
 
@@ -155,6 +156,9 @@ jml | N
 Parameter | Mandatory
 --------- | ---------
 id | Y
+
+- Hapus
+**DELETE** - /api/v1/hapus-buku/{id}
 
 ### Category
 - Category 
@@ -181,5 +185,31 @@ jml | N
 **GET** - /api/v1/provinsi/{id?}
 - Cari Kota By name
 **GET** - /api/v1/provinsi/search/{province_name?}
+
+### Transaksi
+
+- Tambah Transaksi
+
+**POST** - /api/v1/transaksi-buku
+**REQUEST**
+Parameter | Mandatory
+--------- | ---------
+user_id | Y
+book_id | Y
+thumbnail | Y
+buyer_id | N
+
+- Transaksiku
+
+**POST** - /api/v1/transaksi-ku/{user_id}
+
+- Transaksi detail
+
+**POST** - /api/v1/transaksi-detail/{user_id}/{trx_id}
+
+
+
+
+
 
 Jika Parameter terpenuhi maka akan menampilkan buku sesuai dengan isi dari paramater

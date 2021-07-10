@@ -176,4 +176,19 @@ class BookController extends Controller
 	    	}
         	return $data;
 	}
+	function deleteBook($id){
+	    	try {
+				BookModel::where('id',$id)->delete();
+				$data = [
+					'error'=>0,
+					'msg'=>"Sukses hapus buku"
+				];
+	    	} catch (Exception $e) {
+				$data = [
+					'error'=>1,
+					'msg'=>$e->getMessage()
+				];
+	    	}
+        	return $data;
+	}
 }
