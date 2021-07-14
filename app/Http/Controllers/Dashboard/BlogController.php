@@ -80,7 +80,7 @@ class BlogController extends Controller
             $arr = [
                 'article_name'=>$req->title,
                 'thumbnail'=>$req->file('thumbnail')->getClientOriginalName(),
-                'slug'=>$slugIm,
+                'slug'=>$slugIm.'-'.rand(1,999),
                 'article'=>$dom->saveHTML(),
                 'category_id'=>$req->category,
                 'created_at'=>date('Y-m-d')
@@ -148,7 +148,7 @@ class BlogController extends Controller
         if ($req->file('thumbnail')===NULL) {
             $arr = [
                 'article_name'=>$req->title,
-                'slug'=>$slugIm,
+                'slug'=>$slugIm.'-'.rand(1,999),
                 'article'=>$dom->saveHTML(),
                 'category_id'=>$req->category
             ];
