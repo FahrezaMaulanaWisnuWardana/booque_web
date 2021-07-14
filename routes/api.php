@@ -9,6 +9,8 @@ use App\Http\Controllers\v1\LoginAppController;
 use App\Http\Controllers\v1\BookController;
 use App\Http\Controllers\v1\TransactionController;
 use App\Http\Controllers\v1\CategoryController;
+use App\Http\Controllers\v1\BannerController;
+use App\Http\Controllers\v1\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +63,9 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		Route::post("transaksi-detail/{user_id}/{trx_id}",[TransactionController::class,'show']);
 		// Category 
 		Route::post("category/{buku?}/{id?}",[CategoryController::class,'index']);
+		// Banner
+		Route::get("banner",[BannerController::class,'index']);
+		// Blog
+		Route::get("blog",[BlogController::class,'index']);
 	});
 });
