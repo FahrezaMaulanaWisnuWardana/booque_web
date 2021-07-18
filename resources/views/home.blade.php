@@ -105,17 +105,17 @@
                 <div class="row">
                     
                     <div class="col-xl-4 col-lg-4 col-md-6 col-xs-12 col-sm-12">
-                        <h1 class="fw-bold text-center" style="color: #3A4275;">325</h1>
+                        <h1 class="fw-bold text-center" style="color: #3A4275;">{{$jml_buku}}</h1>
                         <h3 class="fw-bold text-center">Semua Buku</h3>
                     </div>
                     
                     <div class="col-xl-4 col-lg-4 col-md-6 col-xs-12 col-sm-12">
-                        <h1 class="fw-bold text-center" style="color: #3A4275;">50</h1>
+                        <h1 class="fw-bold text-center" style="color: #3A4275;">{{$jml_user}}</h1>
                         <h3 class="fw-bold text-center">Pengguna</h3>
                     </div>
                     
                     <div class="col-xl-4 col-lg-4 col-md-12 col-xs-12 col-sm-12">
-                        <h1 class="fw-bold text-center" style="color: #3A4275;">127</h1>
+                        <h1 class="fw-bold text-center" style="color: #3A4275;">{{$buku_terbagikan}}</h1>
                         <h3 class="fw-bold text-center">Buku Yang Terbagikan</h3>
                     </div>
 

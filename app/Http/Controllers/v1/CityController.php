@@ -16,7 +16,7 @@ class CityController extends Controller
      */
     public function index($province_id=null)
     {
-        $city = $province_id ? City::where("id",$province_id)->get() : City::all();
+        $city = $province_id ? City::where("province_id",$province_id)->get() : City::all();
         return $city;
     }
     /**

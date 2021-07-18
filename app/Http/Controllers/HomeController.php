@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     function index(){
-    	return view('home');
+        $data = [
+            'jml_buku'=>DB::table('books')->count(),
+            'jml_user'=>DB::table('booqers_d')->count(),
+            'buku_terbagikan'=>DB::table('books')->where('status',2)->count()
+        ];
+    	return view('home',$data);
     }
     function blog(){
         $data = [
