@@ -77,6 +77,19 @@ class BookController extends Controller
 			'data'=>$data
 		];
 	}
+	function myBook($id){
+		$data = DB::table('books')
+					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->join('booqers_d as user','user.user_id','=','books.user_id')
+					->join('category','category.id','=','books.category_id')
+					->where('books.user_id',$id)
+					->get();
+		return [
+			'error'=>0,
+			'msg'=> 'All data',
+			'data'=>$data
+		];
+	}
 	function likeBook(Request $req){
 		$city = DB::select('SELECT * FROM (SELECT id,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');
 		$arr = [];

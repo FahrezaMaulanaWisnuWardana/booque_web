@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		Route::post("update-buku/{id}",[BookController::class,'updateBook']);
 		Route::post("update-status-buku/{id}",[BookController::class,'updateBookStatus']);
 		Route::post("buku",[BookController::class,'allBook']);
+		Route::post("buku-ku/{id}",[BookController::class,'myBook']);
 		Route::post("buku-cari",[BookController::class,'likeBook']);
 		Route::post("buku-detail",[BookController::class,'detailBook']);
 		Route::delete("hapus-buku/{id}",[BookController::class,'deleteBook']);

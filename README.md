@@ -137,6 +137,10 @@ lng | Y
 dst | N
 jml | N
 
+- Buku-ku (Buku yang user upload)
+
+**POST** - /api/v1/buku-ku/{id}
+
 - Cari Buku By name
 **POST** - /api/v1/buku-cari
 
