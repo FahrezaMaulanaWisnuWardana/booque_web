@@ -113,6 +113,7 @@ class BookController extends Controller
 	}
 	function detailBook(Request $req){
 		$data = DB::table('books')
+					->select('books.id','books.user_id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
 					->where('books.id',$req->id)
