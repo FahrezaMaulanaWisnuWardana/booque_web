@@ -77,6 +77,18 @@ class BookController extends Controller
 			'data'=>$data
 		];
 	}
+	function allofBook(){
+		$data = DB::table('books')
+					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->join('booqers_d as user','user.user_id','=','books.user_id')
+					->join('category','category.id','=','books.category_id')
+					->get();
+		return [
+			'error'=>0,
+			'msg'=> 'All data',
+			'data'=>$data
+		];
+	}
 	function myBook($id){
 		$data = DB::table('books')
 					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
