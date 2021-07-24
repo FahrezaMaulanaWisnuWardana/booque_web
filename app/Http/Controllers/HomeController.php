@@ -17,13 +17,27 @@ class HomeController extends Controller
     }
     function blog(){
         $data = [
-            'blog' => DB::table('blog')->select('*','blog.created_at as tgl_buat')->join('blog_category','blog_category.id','=','blog.category_id')->get()
+            'blog' => DB::table('blog')
+                        ->select('*','blog.created_at as tgl_buat')
+                        ->join('blog_category','blog_category.id','=','blog.category_id')
+                        ->get()
+        ];
+        return view('blog',$data);
+    }
+    function cari(Request $req){
+        $data = [
+            'blog' => DB::table('blog')
+                        ->select('*','blog.created_at as tgl_buat')
+                        ->join('blog_category','blog_category.id','=','blog.category_id')
+                        ->where('article_name','LIKE',"%".$req->cari."%")
+                        ->get()
         ];
         return view('blog',$data);
     }
     function detailBlog($type , $slug){
         $data = [
-            'blog' => DB::table('blog')->select('*','blog.created_at as tgl_buat')->join('blog_category','blog_category.id','=','blog.category_id')->where(['blog_category.category_name'=> $type ,'blog.slug'=>$slug])->first()
+            'blog' => DB::table('blog')->select('*','blog.created_at as tgl_buat')->join('blog_category','blog_category.id','=','blog.category_id')->where(['blog_category.category_name'=> $type ,'blog.slug'=>$slug])->first(),
+            'someblog' => DB::table('blog')->select('*','blog.created_at as tgl_buat')->join('blog_category','blog_category.id','=','blog.category_id')->limit(4)->get()
         ];
         return view('d-blog',$data);
     }

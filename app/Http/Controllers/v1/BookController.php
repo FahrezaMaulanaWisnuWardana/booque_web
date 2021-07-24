@@ -66,7 +66,7 @@ class BookController extends Controller
 			array_push($arr,$value->id);
 		}
 		$data = DB::table('books')
-					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->select('books.id','books.user_id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
 					->where('books.city_id',$arr)
@@ -79,7 +79,7 @@ class BookController extends Controller
 	}
 	function allofBook(){
 		$data = DB::table('books')
-					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->select('books.id','books.user_id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
 					->get();
@@ -91,7 +91,7 @@ class BookController extends Controller
 	}
 	function myBook($id){
 		$data = DB::table('books')
-					->select('books.id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
+					->select('books.id','books.user_id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
 					->where('books.user_id',$id)

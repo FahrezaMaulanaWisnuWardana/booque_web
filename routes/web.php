@@ -17,6 +17,7 @@ use App\Http\Controllers\Dashboard\TransactionController;
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/blog',[HomeController::class,'blog']);
+Route::get('/blog/cari',[HomeController::class,'cari']);
 Route::get('/blog/{category?}/{slug?}',[HomeController::class,'detailBlog']);
 Route::get('/email',[HomeController::class,'mailTemplate']);
 // Auth Dashboard

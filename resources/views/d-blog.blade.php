@@ -24,7 +24,7 @@
         </div>
     </header>
     <div class="container blog-container">
-    	<div class="article mt-5">
+    	<div class="article my-5">
 	    	<h1 class="text-center">{{$blog->article_name}}</h1>
 	    	<p class="text-center">{{date("d-m-Y",strtotime($blog->tgl_buat))}}</span>
 	    	<div class="text-center">
@@ -35,6 +35,24 @@
 				{!! $blog->article !!}
 			</div>
     	</div>
+        <div class="row mt-5">
+            <h3>Artikel Lainnya...</h3>
+            @foreach($someblog as $dataBlog)
+            <div class="col-lg-4 py-2">
+                <a href="{{'blog/'.$dataBlog->category_name.'/'.$dataBlog->slug}}">
+                    <div class="card">
+                        <div style="height:230px; overflow-y:hidden">
+                            <img src="{{asset('storage/blog/thumbnail/'.$dataBlog->thumbnail)}}" class="card-img-top rounded">
+                        </div>
+                        <div class="card-body">
+                        <h4 class="card-title">{{$dataBlog->article_name}}</h4>
+                        <small class="card-title">{{date("d-m-Y",strtotime($dataBlog->tgl_buat))}}</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
     </div>
     <footer class="container py-5">
         <div class="row">
@@ -51,8 +69,8 @@
             <div class="col">
                 <ul>
                     <li class="fw-bold">Menu</li>
-                    <li class="mt-2"><a href="#">Beranda</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li class="mt-2"><a  class="text-dark" href="{{url('/')}}">Beranda</a></li>
+                    <li><a class="text-dark" href="{{url('/blog')}}">Blog</a></li>
                     <li><a href="#">Kontak Kami</a></li>
                 </ul>
             </div>

@@ -26,64 +26,15 @@
     <div class="container blog-container">
     	<h1>Ada Apa di Booque?</h1>
     	<h5>Tips Dan Trik seputar buku</h5>
-    	<form class="row">
+    	<form class="row" action="{{url('/blog/cari')}}" method="GET">
     		<div class="col-lg-5 col-sm-5">
 	    		<div class="input-group">
-			      <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Cari kuy">
-			      <input type="submit" class="btn btn-primary input-group-text" name="cari" value="Cari..">
+			      <input type="text" class="form-control" id="autoSizingInputGroup" name="cari" value="{{ old('cari') }}" placeholder="Cari kuy">
+			      <input type="submit" class="btn btn-primary input-group-text" value="cari">
 			    </div>
     		</div>
     	</form>
     	<div class="row mt-4">
-    		<!-- <div class="col-lg-6 col-sm-12 p-1">
-                <div class="card">
-                  <img src="https://lelogama.go-jek.com/cache/c7/27/c72786f250df9147b0bb82210890726a.webp" class="card-img-top rounded">
-                  <div class="card-body p-0">
-                    <h4 class="card-title">Ingfo</h4>
-                    <h5 class="card-title">Card title</h5>
-                  </div>
-                </div>
-    		</div>
-            <div class="col-lg-6 col-sm-12 d-flex align-items-center">
-                <div class="row">
-                    <div class="col-lg-6 px-3 py-1">
-                        <div class="card">
-                          <img src="https://lelogama.go-jek.com/cache/c7/27/c72786f250df9147b0bb82210890726a.webp" class="card-img-top rounded">
-                          <div class="card-body p-0">
-                            <h4 class="card-title">Card title</h4>
-                            <small class="card-title">19/09/2020</small>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 py-1">
-                        <div class="card">
-                          <img src="https://lelogama.go-jek.com/cache/c7/27/c72786f250df9147b0bb82210890726a.webp" class="card-img-top rounded">
-                          <div class="card-body p-0">
-                            <h4 class="card-title">Card title</h4>
-                            <small class="card-title">19/09/2020</small>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 py-1">
-                        <div class="card">
-                          <img src="https://lelogama.go-jek.com/cache/c7/27/c72786f250df9147b0bb82210890726a.webp" class="card-img-top rounded">
-                          <div class="card-body p-0">
-                            <h4 class="card-title">Card title</h4>
-                            <small class="card-title">19/09/2020</small>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 py-1">
-                        <div class="card">
-                          <img src="https://lelogama.go-jek.com/cache/c7/27/c72786f250df9147b0bb82210890726a.webp" class="card-img-top rounded">
-                          <div class="card-body p-0">
-                            <h4 class="card-title">Card title</h4>
-                            <small class="card-title">19/09/2020</small>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="row p-0">
                 @if(count($blog)<1)
                     <h1 class="text-center mt-4">Belum ada artikel..</h1>
@@ -92,7 +43,9 @@
                     <div class="col-lg-4 py-2">
                         <a href="{{'blog/'.$dataBlog->category_name.'/'.$dataBlog->slug}}">
                             <div class="card">
-                              <img src="{{asset('storage/blog/thumbnail/'.$dataBlog->thumbnail)}}" class="card-img-top rounded">
+                                <div style="height:230px; overflow-y:hidden">
+                                    <img src="{{asset('storage/blog/thumbnail/'.$dataBlog->thumbnail)}}" class="card-img-top rounded">
+                                </div>
                               <div class="card-body">
                                 <h4 class="card-title">{{$dataBlog->article_name}}</h4>
                                 <small class="card-title">{{date("d-m-Y",strtotime($dataBlog->tgl_buat))}}</small>
