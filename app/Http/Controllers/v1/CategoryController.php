@@ -11,16 +11,12 @@ use App\Models\CategoryModel;
 
 class CategoryController extends Controller
 {
-    function index(Request $req, $book=null , $id=null){
+    function index($book=null , $id=null, $lat=null , $lng=null , $dst=null , $jml=null){
         $data = CategoryModel::all();
-        if(!is_null($book) && is_null($id)){
-            $data = ['err'=>1,'msg'=>'One parameter detected two parameter expected'];
+        if(is_null($book) && is_null($id) && is_null($lat) && is_null($lng) && is_null($dst) && is_null($jml)){
+            $data = ['err'=>1,'msg'=>'Param Need'];
         }else{
-            $arr = request()->validate([
-                'lat'=>'required',
-                'lng'=>'required'
-            ]);
-            $city = DB::select('SELECT * FROM (SELECT id,(((acos(sin(( '.$req->lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$req->lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$req->lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($req->dst)?'50':$req->dst).' LIMIT '.(is_null($req->jml)?'3':$req->jml).'');
+            $city = DB::select('SELECT * FROM (SELECT id,(((acos(sin(( '.$lat.' * pi() / 180))*sin(( `latitude` * pi() / 180)) + cos(( '.$lat.' * pi() /180 ))*cos(( `latitude` * pi() / 180)) * cos((( '.$lng.' - `longitude`) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance FROM city ) markers WHERE distance <= '.(is_null($dst)?'50':$dst).' LIMIT '.(is_null($jml)?'3':$jml).'');
             $arr = [];
             foreach ($city as $data => $value) {
                 array_push($arr,$value->id);
@@ -33,6 +29,10 @@ class CategoryController extends Controller
                                     ['b.city_id',$arr],
                                 ])->get();
         }
+        return $data;
+    }
+    function category(){
+        $data = CategoryModel::all();
         return $data;
     }
 }

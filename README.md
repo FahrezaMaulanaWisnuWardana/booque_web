@@ -167,16 +167,9 @@ id | Y
 ### Category
 - Category 
 
-**POST** - /api/v1/category/{buku?}/{id?}
-### id = Category Id
-## Jika kedua parameter terpenuhi maka silahkan kirim request dibawah
-**REQUEST**
-Parameter | Mandatory
---------- | ---------
-lat | Y
-lng | Y
-dst | N
-jml | N
+**GET** - /api/v1/category/{buku?}/{id?}
+
+**GET** - /api/v1/semua-category
 
 ### Kota
 - Kota

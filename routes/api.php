@@ -64,7 +64,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		Route::post("transaksi-ku/{user_id}",[TransactionController::class,'index']);
 		Route::post("transaksi-detail/{user_id}/{trx_id}",[TransactionController::class,'show']);
 		// Category 
-		Route::post("category/{buku?}/{id?}",[CategoryController::class,'index']);
+		Route::get("category/{buku?}/{id?}/{lat?}/{lng?}/{dst?}/{jml?}",[CategoryController::class,'index']);
+		Route::get("semua-category",[CategoryController::class,'category']);
 		// Banner
 		Route::get("banner",[BannerController::class,'index']);
 		// Blog
