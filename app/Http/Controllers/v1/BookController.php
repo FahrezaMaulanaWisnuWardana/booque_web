@@ -70,6 +70,7 @@ class BookController extends Controller
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
 					->where('books.city_id',$arr)
+					->orderBy('books.status')
 					->get();
 		return [
 			'error'=>0,
@@ -82,6 +83,7 @@ class BookController extends Controller
 					->select('books.id','books.user_id','books.book_name','user.full_name','books.description','books.address','category.category_name','books.status','books.thumbnail','books.author','books.year','books.publisher')
 					->join('booqers_d as user','user.user_id','=','books.user_id')
 					->join('category','category.id','=','books.category_id')
+					->orderBy('books.status')
 					->get();
 		return [
 			'error'=>0,
