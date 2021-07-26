@@ -31,6 +31,18 @@ class CategoryController extends Controller
         }
         return $data;
     }
+    function byId($id=null){
+        $data = CategoryModel::all();
+        if(is_null($id)){
+            $data = ['err'=>1,'msg'=>'Param Need'];
+        }else{
+            $data = DB::table('category')
+                        ->select('category.id','category.category_name','b.id as b_id','b.book_name','b.thumbnail','b.publisher','b.year','b.author')
+                        ->join('books as b','b.category_id','=','category.id')
+                        ->where(['b.category_id',$id])->get();
+        }
+        return $data;
+    }
     function category(){
         $data = CategoryModel::all();
         return $data;

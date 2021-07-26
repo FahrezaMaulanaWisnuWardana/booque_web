@@ -72,19 +72,19 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="py-5" style="padding-left: 70px">
-                                <h3>Cara Ikutan Berbagi</h3>
+                                <h3>Apa saja yang kamu dapatkan?</h3>
                                 <div class="list">
                                     <div>
-                                        <b>1.Tambah buku di Booque</b><br>
-                                        <small>Ambil Gambar, Atur lokasi pengambilan - rumah , kantor atau lokasi publik.</small>
+                                        <b>1.Teman baru</b><br>
+                                        <small>Dapatkan teman baru , bertemu dengan orang baru yang memiliki hobi yang sama.</small>
                                     </div>
                                     <div>
-                                        <b>2.Terhubung dengan pengguna lain</b><br>
-                                        <small>Tunggu pengguna lain menghubungi kamu.</small>
+                                        <b>2.Komunitas</b><br>
+                                        <small>Bentuklah komunitas dengan orang yang sehobi dengan kamu.</small>
                                     </div>
                                     <div>
                                         <b>3.Selamat berbagi</b><br>
-                                        <small>Selamat anda menjadi bagian dari Booque !</small>
+                                        <small>Selamat menjadi bagian dari Booque !</small>
                                     </div>
                                 </div>
                             </div>
@@ -136,9 +136,9 @@
                     <div class="col align-self-center">
                         <h3 class="text-center">Booque</h3>
                         <p class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            Punya buku tak terpakai?, Sumpek ngeliat buku yang numpuk gitu aja tapi udah pernah dibaca?
+                            disumbangin aja! , di booque kamu bisa menyumbangkan buku kamu yang sudah tidak terpakai,
+                            yuk tunggu apa lagi punya buku tak terpakai?? sumbangkan di booque!.
                         </p>
                     </div>
                 </div>

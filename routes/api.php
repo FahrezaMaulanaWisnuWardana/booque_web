@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 		// Category 
 		Route::get("category/{buku?}/{id?}/{lat?}/{lng?}/{dst?}/{jml?}",[CategoryController::class,'index']);
 		Route::get("semua-category",[CategoryController::class,'category']);
+		Route::get("book-category/{id?}",[CategoryController::class,'byId']);
 		// Banner
 		Route::get("banner",[BannerController::class,'index']);
 		// Blog
